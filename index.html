@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ignacio Peralta - Graphics Developer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">Ignacio Peralta</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#projects" class="nav-link">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">Graphics Developer</h1>
+                <p class="hero-subtitle">Specialized in Video Game Programming & Rendering Engines</p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">View Projects</a>
+                    <a href="#about" class="btn btn-secondary">About Me</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="code-animation">
+                    <div class="code-line">
+                        <span class="code-keyword">void</span> 
+                        <span class="code-function">renderFrame</span>
+                        <span class="code-bracket">()</span>
+                        <span class="code-bracket">{</span>
+                    </div>
+                    <div class="code-line indent">
+                        <span class="code-comment">// Update uniforms</span>
+                    </div>
+                    <div class="code-line indent">
+                        <span class="code-function">glUseProgram</span>
+                        <span class="code-bracket">(</span>
+                        <span class="code-variable">shaderProgram</span>
+                        <span class="code-bracket">);</span>
+                    </div>
+                    <div class="code-line indent">
+                        <span class="code-function">glDrawElements</span>
+                        <span class="code-bracket">(</span>
+                        <span class="code-constant">GL_TRIANGLES</span>
+                        <span class="code-bracket">);</span>
+                    </div>
+                    <div class="code-line">
+                        <span class="code-bracket">}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>I'm a software developer from Argentina with a strong passion for programming, particularly in the realm of graphics development. Over the course of my career, I've embarked on diverse projects, ranging from video games and mobile apps to bots, websites, and various development tools.</p>
+                    
+                    <p>My expertise in graphics programming includes working with technologies like OpenGL, Vulkan and DirectX, as well as advanced techniques in rendering, VFX, shader programming, offline and real-time graphics optimization.</p>
+                    
+                    <p>I have a solid foundation in transforming innovative ideas into tangible and functional visual experiences. My experience spans various aspects of graphics development, including offline and real-time rendering, image processing, and graphics engine design.</p>
+                    
+                    <p>Collaboration and teamwork are values I hold dear, and I thrive in dynamic, agile environments. My adaptability to change and commitment to delivering results make me a valuable asset to any project or team, especially those focused on cutting-edge graphics technologies and innovative visual solutions.</p>
+                </div>
+                
+                <div class="skills-section">
+                    <div class="skill-category">
+                        <h3>Programming Languages</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">C</span>
+                            <span class="skill-tag">C++</span>
+                            <span class="skill-tag">C#</span>
+                            <span class="skill-tag">Rust</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Lua</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">GLSL</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3>Graphics & Technologies</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">OpenGL</span>
+                            <span class="skill-tag">Vulkan</span>
+                            <span class="skill-tag">DirectX12</span>
+                            <span class="skill-tag">OpenCL</span>
+                            <span class="skill-tag">CUDA</span>
+                            <span class="skill-tag">Assimp</span>
+                            <span class="skill-tag">Numpy</span>
+                            <span class="skill-tag">TensorFlow</span>
+                            <span class="skill-tag">PyTorch</span>
+                            <span class="skill-tag">OpenCV</span>
+                            <span class="skill-tag">FFmpeg</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3>Engines & Frameworks</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Unreal Engine</span>
+                            <span class="skill-tag">Godot Engine</span>
+                            <span class="skill-tag">Open 3D Engine</span>
+                            <span class="skill-tag">Unity Engine</span>
+                            <span class="skill-tag">Qt Framework</span>
+                            <span class="skill-tag">.NET</span>
+                            <span class="skill-tag">Android Studio</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card" data-project="1">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/400x250/1a1a2e/ffffff?text=3D+Renderer" alt="Custom 3D Renderer">
+                        <div class="project-overlay">
+                            <i class="fas fa-eye"></i>
+                            <span>View Details</span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Custom 3D Renderer</h3>
+                        <p>Real-time 3D renderer built from scratch using OpenGL and C++</p>
+                        <div class="project-tags">
+                            <span class="tag">C++</span>
+                            <span class="tag">OpenGL</span>
+                            <span class="tag">GLSL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card" data-project="2">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/400x250/16213e/ffffff?text=Physics+Engine" alt="Physics Engine">
+                        <div class="project-overlay">
+                            <i class="fas fa-eye"></i>
+                            <span>View Details</span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Physics Engine</h3>
+                        <p>Custom physics simulation engine with collision detection</p>
+                        <div class="project-tags">
+                            <span class="tag">C++</span>
+                            <span class="tag">Physics</span>
+                            <span class="tag">CUDA</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card" data-project="3">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/400x250/0f3460/ffffff?text=Shader+Editor" alt="Shader Editor">
+                        <div class="project-overlay">
+                            <i class="fas fa-eye"></i>
+                            <span>View Details</span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Real-time Shader Editor</h3>
+                        <p>Live shader editing tool with real-time preview</p>
+                        <div class="project-tags">
+                            <span class="tag">C#</span>
+                            <span class="tag">DirectX</span>
+                            <span class="tag">HLSL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card" data-project="4">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/400x250/533483/ffffff?text=Game+Engine" alt="Game Engine">
+                        <div class="project-overlay">
+                            <i class="fas fa-eye"></i>
+                            <span>View Details</span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Indie Game Engine</h3>
+                        <p>Complete game engine with rendering pipeline and editor</p>
+                        <div class="project-tags">
+                            <span class="tag">C++</span>
+                            <span class="tag">Vulkan</span>
+                            <span class="tag">Qt</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card" data-project="5">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/400x250/7209b7/ffffff?text=Ray+Tracer" alt="Ray Tracer">
+                        <div class="project-overlay">
+                            <i class="fas fa-eye"></i>
+                            <span>View Details</span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>GPU Ray Tracer</h3>
+                        <p>High-performance ray tracer using GPU compute shaders</p>
+                        <div class="project-tags">
+                            <span class="tag">Rust</span>
+                            <span class="tag">OpenCL</span>
+                            <span class="tag">Ray Tracing</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="project-card" data-project="6">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/400x250/a663cc/ffffff?text=VFX+Tool" alt="VFX Tool">
+                        <div class="project-overlay">
+                            <i class="fas fa-eye"></i>
+                            <span>View Details</span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>VFX Processing Tool</h3>
+                        <p>Real-time visual effects processing using machine learning</p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">TensorFlow</span>
+                            <span class="tag">OpenCV</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
+                <p>Interested in collaborating on graphics programming projects or discussing opportunities?</p>
+                <div class="contact-links">
+                    <a href="mailto:your.email@example.com" class="contact-link">
+                        <i class="fas fa-envelope"></i>
+                        <span>Email</span>
+                    </a>
+                    <a href="https://linkedin.com/in/yourprofile" class="contact-link">
+                        <i class="fab fa-linkedin"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://github.com/yourusername" class="contact-link">
+                        <i class="fab fa-github"></i>
+                        <span>GitHub</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle"></h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="modal-gallery">
+                    <div class="main-image">
+                        <img id="modalMainImage" src="" alt="">
+                    </div>
+                    <div class="thumbnail-gallery">
+                        <div class="thumbnails" id="modalThumbnails"></div>
+                    </div>
+                </div>
+                <div class="modal-info">
+                    <div class="modal-description" id="modalDescription"></div>
+                    <div class="modal-tech" id="modalTech"></div>
+                    <div class="modal-links" id="modalLinks"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
