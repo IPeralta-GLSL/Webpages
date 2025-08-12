@@ -46,7 +46,7 @@ body {
 .nav-logo .logo-text {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #64ffda;
+    color: #4CAF50;
 }
 
 .nav-menu {
@@ -64,7 +64,7 @@ body {
 }
 
 .nav-link:hover {
-    color: #64ffda;
+    color: #4CAF50;
 }
 
 .nav-link::after {
@@ -74,7 +74,7 @@ body {
     left: 0;
     width: 0;
     height: 2px;
-    background: #64ffda;
+    background: #4CAF50;
     transition: width 0.3s ease;
 }
 
@@ -130,7 +130,7 @@ body {
     font-size: 3.5rem;
     font-weight: 700;
     margin-bottom: 1rem;
-    background: linear-gradient(135deg, #64ffda, #ffffff);
+    background: linear-gradient(135deg, #4CAF50, #ffffff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -157,14 +157,14 @@ body {
 }
 
 .btn-primary {
-    background: #64ffda;
+    background: #4CAF50;
     color: #0a0a0a;
 }
 
 .btn-primary:hover {
     background: transparent;
-    border-color: #64ffda;
-    color: #64ffda;
+    border-color: #4CAF50;
+    color: #4CAF50;
     transform: translateY(-2px);
 }
 
@@ -227,7 +227,7 @@ body {
     left: 50%;
     transform: translateX(-50%);
     animation: bounce 2s infinite;
-    color: #64ffda;
+    color: #4CAF50;
     font-size: 1.5rem;
 }
 
@@ -242,7 +242,7 @@ body {
     font-size: 2.5rem;
     text-align: center;
     margin-bottom: 3rem;
-    color: #64ffda;
+    color: #4CAF50;
     position: relative;
 }
 
@@ -254,7 +254,7 @@ body {
     transform: translateX(-50%);
     width: 60px;
     height: 3px;
-    background: #64ffda;
+    background: #4CAF50;
 }
 
 /* About Section */
@@ -294,14 +294,14 @@ body {
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
-    border: 4px solid #64ffda;
+    border: 4px solid #4CAF50;
     transition: all 0.3s ease;
-    box-shadow: 0 10px 30px rgba(100, 255, 218, 0.3);
+    box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
 }
 
 .profile-photo:hover {
     transform: scale(1.05);
-    box-shadow: 0 15px 40px rgba(100, 255, 218, 0.4);
+    box-shadow: 0 15px 40px rgba(76, 175, 80, 0.4);
 }
 
 .profile-border {
@@ -310,7 +310,7 @@ body {
     left: -10px;
     right: -10px;
     bottom: -10px;
-    border: 2px solid rgba(100, 255, 218, 0.3);
+    border: 2px solid rgba(76, 175, 80, 0.3);
     border-radius: 50%;
     animation: rotate 10s linear infinite;
 }
@@ -339,7 +339,7 @@ body {
 }
 
 .skill-category h3 {
-    color: #64ffda;
+    color: #4CAF50;
     margin-bottom: 1rem;
     font-size: 1.2rem;
 }
@@ -350,18 +350,76 @@ body {
     gap: 0.5rem;
 }
 
+.skill-icons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.skill-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0.5rem;
+    background: rgba(76, 175, 80, 0.05);
+    border: 1px solid rgba(76, 175, 80, 0.2);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.skill-icon:hover {
+    background: rgba(76, 175, 80, 0.1);
+    border-color: rgba(76, 175, 80, 0.4);
+    transform: translateY(-5px);
+}
+
+.skill-icon i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: #4CAF50;
+}
+
+.skill-icon span {
+    font-size: 0.8rem;
+    color: #cccccc;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* Specific icon colors */
+.skill-icon i.devicon-c-plain { color: #659AD2; }
+.skill-icon i.devicon-cplusplus-plain { color: #659AD2; }
+.skill-icon i.devicon-csharp-plain { color: #239120; }
+.skill-icon i.devicon-rust-plain { color: #CE422B; }
+.skill-icon i.devicon-python-plain { color: #3776AB; }
+.skill-icon i.devicon-lua-plain { color: #2C2D72; }
+.skill-icon i.devicon-javascript-plain { color: #F7DF1E; }
+.skill-icon i.devicon-opengl-plain { color: #5586A4; }
+.skill-icon i.vulkan-icon { color: #AC162C; }
+.skill-icon i.cuda-icon { color: #76B900; }
+.skill-icon i.devicon-unity-original { color: #000000; }
+.skill-icon i.devicon-unrealengine-original { color: #0E1128; }
+.skill-icon i.devicon-godot-plain { color: #478CBF; }
+.skill-icon i.devicon-qt-original { color: #41CD52; }
+.skill-icon i.devicon-dot-net-plain { color: #512BD4; }
+.skill-icon i.devicon-android-plain { color: #3DDC84; }
+.skill-icon i.fab.fa-nvidia { color: #76B900; }
+.skill-icon i.fab.fa-microsoft { color: #00BCF2; }
+
 .skill-tag {
-    background: rgba(100, 255, 218, 0.1);
-    color: #64ffda;
+    background: rgba(76, 175, 80, 0.1);
+    color: #4CAF50;
     padding: 0.4rem 0.8rem;
     border-radius: 20px;
     font-size: 0.9rem;
-    border: 1px solid rgba(100, 255, 218, 0.3);
+    border: 1px solid rgba(76, 175, 80, 0.3);
     transition: all 0.3s ease;
 }
 
 .skill-tag:hover {
-    background: rgba(100, 255, 218, 0.2);
+    background: rgba(76, 175, 80, 0.2);
     transform: translateY(-2px);
 }
 
@@ -388,7 +446,7 @@ body {
 
 .project-card:hover {
     transform: translateY(-10px);
-    border-color: #64ffda;
+    border-color: #4CAF50;
 }
 
 .project-image {
@@ -413,7 +471,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(100, 255, 218, 0.9);
+    background: rgba(76, 175, 80, 0.9);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -455,12 +513,12 @@ body {
 }
 
 .tag {
-    background: rgba(100, 255, 218, 0.1);
-    color: #64ffda;
+    background: rgba(76, 175, 80, 0.1);
+    color: #4CAF50;
     padding: 0.3rem 0.6rem;
     border-radius: 15px;
     font-size: 0.8rem;
-    border: 1px solid rgba(100, 255, 218, 0.3);
+    border: 1px solid rgba(76, 175, 80, 0.3);
 }
 
 /* Contact Section */
@@ -496,9 +554,9 @@ body {
 }
 
 .contact-link:hover {
-    background: rgba(100, 255, 218, 0.1);
-    border-color: #64ffda;
-    color: #64ffda;
+    background: rgba(76, 175, 80, 0.1);
+    border-color: #4CAF50;
+    color: #4CAF50;
     transform: translateY(-2px);
 }
 
@@ -550,7 +608,7 @@ body {
 }
 
 .modal-header h2 {
-    color: #64ffda;
+    color: #4CAF50;
     margin: 0;
 }
 
@@ -563,7 +621,7 @@ body {
 }
 
 .close:hover {
-    color: #64ffda;
+    color: #4CAF50;
 }
 
 .modal-body {
@@ -603,7 +661,7 @@ body {
 
 .thumbnail:hover,
 .thumbnail.active {
-    border-color: #64ffda;
+    border-color: #4CAF50;
 }
 
 .modal-description {
@@ -617,7 +675,7 @@ body {
 }
 
 .modal-tech h4 {
-    color: #64ffda;
+    color: #4CAF50;
     margin-bottom: 1rem;
 }
 
@@ -625,16 +683,16 @@ body {
     display: inline-block;
     margin-right: 1rem;
     padding: 0.5rem 1rem;
-    background: rgba(100, 255, 218, 0.1);
-    color: #64ffda;
+    background: rgba(76, 175, 80, 0.1);
+    color: #4CAF50;
     text-decoration: none;
     border-radius: 6px;
-    border: 1px solid rgba(100, 255, 218, 0.3);
+    border: 1px solid rgba(76, 175, 80, 0.3);
     transition: all 0.3s ease;
 }
 
 .modal-links a:hover {
-    background: rgba(100, 255, 218, 0.2);
+    background: rgba(76, 175, 80, 0.2);
     transform: translateY(-2px);
 }
 
@@ -693,6 +751,23 @@ body {
         margin: 0 auto;
     }
 
+    .skill-icons {
+        grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+        gap: 0.8rem;
+    }
+
+    .skill-icon {
+        padding: 0.8rem 0.4rem;
+    }
+
+    .skill-icon i {
+        font-size: 1.5rem;
+    }
+
+    .skill-icon span {
+        font-size: 0.7rem;
+    }
+
     .projects-grid {
         grid-template-columns: 1fr;
     }
@@ -744,5 +819,23 @@ body {
     .profile-image {
         width: 180px;
         height: 180px;
+    }
+
+    .skill-icons {
+        grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+        gap: 0.6rem;
+    }
+
+    .skill-icon {
+        padding: 0.6rem 0.3rem;
+    }
+
+    .skill-icon i {
+        font-size: 1.2rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .skill-icon span {
+        font-size: 0.6rem;
     }
 }

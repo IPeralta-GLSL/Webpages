@@ -301,7 +301,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe elements for scroll animations
-document.querySelectorAll('.project-card, .about-text, .skills-section, .profile-image').forEach(el => {
+document.querySelectorAll('.project-card, .about-text, .skills-section, .profile-image, .skill-icon').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
@@ -371,14 +371,14 @@ window.addEventListener('load', () => {
         
         .loading-content {
             text-align: center;
-            color: #64ffda;
+            color: #4CAF50;
         }
         
         .loading-spinner {
             width: 50px;
             height: 50px;
-            border: 3px solid rgba(100, 255, 218, 0.3);
-            border-top: 3px solid #64ffda;
+            border: 3px solid rgba(76, 175, 80, 0.3);
+            border-top: 3px solid #4CAF50;
             border-radius: 50%;
             animation: spin 1s linear infinite;
             margin: 0 auto 1rem;
@@ -425,7 +425,7 @@ function createParticles() {
             position: absolute;
             width: 2px;
             height: 2px;
-            background: rgba(100, 255, 218, 0.3);
+            background: rgba(76, 175, 80, 0.3);
             border-radius: 50%;
             animation: float-particle ${5 + Math.random() * 10}s linear infinite;
             left: ${Math.random() * 100}%;
