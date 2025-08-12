@@ -400,10 +400,20 @@ body {
     transform: translateY(-5px);
 }
 
-.skill-icon i {
+.skill-icon i,
+.skill-icon svg,
+.skill-icon img {
     font-size: 2rem;
+    width: 40px;
+    height: 40px;
     margin-bottom: 0.5rem;
     color: #4CAF50;
+    transition: all 0.3s ease;
+}
+
+.skill-icon:hover svg,
+.skill-icon:hover img {
+    transform: scale(1.1);
 }
 
 .skill-icon span {
@@ -413,23 +423,7 @@ body {
     font-weight: 500;
 }
 
-/* Specific icon colors */
-.skill-icon i.devicon-c-plain { color: #659AD2; }
-.skill-icon i.devicon-cplusplus-plain { color: #659AD2; }
-.skill-icon i.devicon-csharp-plain { color: #239120; }
-.skill-icon i.devicon-rust-plain { color: #CE422B; }
-.skill-icon i.devicon-python-plain { color: #3776AB; }
-.skill-icon i.devicon-lua-plain { color: #2C2D72; }
-.skill-icon i.devicon-javascript-plain { color: #F7DF1E; }
-.skill-icon i.devicon-opengl-plain { color: #5586A4; }
-.skill-icon i.vulkan-icon { color: #AC162C; }
-.skill-icon i.cuda-icon { color: #76B900; }
-.skill-icon i.devicon-unity-original { color: #000000; }
-.skill-icon i.devicon-unrealengine-original { color: #0E1128; }
-.skill-icon i.devicon-godot-plain { color: #478CBF; }
-.skill-icon i.devicon-qt-original { color: #41CD52; }
-.skill-icon i.devicon-dot-net-plain { color: #512BD4; }
-.skill-icon i.devicon-android-plain { color: #3DDC84; }
+/* SVG icon styles are handled inline */
 .skill-icon i.fab.fa-nvidia { color: #76B900; }
 .skill-icon i.fab.fa-microsoft { color: #00BCF2; }
 
