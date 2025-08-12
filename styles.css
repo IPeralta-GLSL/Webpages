@@ -244,6 +244,7 @@ body {
     margin-bottom: 3rem;
     color: #4CAF50;
     position: relative;
+    z-index: 2;
 }
 
 .section-title::after {
@@ -261,12 +262,59 @@ body {
 .about {
     padding: 100px 0;
     background: #111111;
+    position: relative;
+    overflow: hidden;
+}
+
+.about::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(90deg, rgba(76, 175, 80, 0.1) 1px, transparent 1px),
+        linear-gradient(rgba(76, 175, 80, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: grid3d 20s linear infinite;
+    z-index: 1;
+}
+
+.about::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(45deg, rgba(76, 175, 80, 0.05) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(76, 175, 80, 0.05) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(76, 175, 80, 0.05) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(76, 175, 80, 0.05) 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    animation: grid3d-diagonal 25s linear infinite reverse;
+    z-index: 1;
+}
+
+@keyframes grid3d {
+    0% { transform: perspective(1000px) rotateX(60deg) translateY(0px); }
+    100% { transform: perspective(1000px) rotateX(60deg) translateY(50px); }
+}
+
+@keyframes grid3d-diagonal {
+    0% { transform: translateX(0px) translateY(0px); }
+    100% { transform: translateX(20px) translateY(20px); }
 }
 
 .about-content {
     display: flex;
     flex-direction: column;
     gap: 3rem;
+    position: relative;
+    z-index: 2;
 }
 
 .about-main {
@@ -427,12 +475,54 @@ body {
 .projects {
     padding: 100px 0;
     background: #0a0a0a;
+    position: relative;
+    overflow: hidden;
+}
+
+.projects::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(90deg, rgba(76, 175, 80, 0.08) 1px, transparent 1px),
+        linear-gradient(rgba(76, 175, 80, 0.08) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: grid3d-projects 30s linear infinite;
+    z-index: 1;
+}
+
+.projects::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(76, 175, 80, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+    animation: grid3d-radial 40s linear infinite;
+    z-index: 1;
+}
+
+@keyframes grid3d-projects {
+    0% { transform: perspective(800px) rotateX(45deg) translateY(0px) translateX(0px); }
+    100% { transform: perspective(800px) rotateX(45deg) translateY(60px) translateX(30px); }
+}
+
+@keyframes grid3d-radial {
+    0% { transform: rotate(0deg) scale(1); }
+    100% { transform: rotate(360deg) scale(1.1); }
 }
 
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2rem;
+    position: relative;
+    z-index: 2;
 }
 
 .project-card {
@@ -526,18 +616,78 @@ body {
     padding: 100px 0;
     background: #111111;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(60deg, rgba(76, 175, 80, 0.06) 1px, transparent 1px),
+        linear-gradient(120deg, rgba(76, 175, 80, 0.06) 1px, transparent 1px);
+    background-size: 40px 40px;
+    animation: grid3d-contact 35s linear infinite;
+    z-index: 1;
+}
+
+@keyframes grid3d-contact {
+    0% { transform: perspective(600px) rotateX(30deg) rotateY(0deg) translateZ(0px); }
+    100% { transform: perspective(600px) rotateX(30deg) rotateY(360deg) translateZ(20px); }
+}
+
+/* Grid 3D Floating Points */
+.about::after,
+.projects::after,
+.contact::after {
+    opacity: 0.7;
+}
+
+/* Additional grid layers for depth */
+.grid-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Responsive grid adjustments */
+@media (max-width: 768px) {
+    .about::before,
+    .projects::before,
+    .contact::before {
+        background-size: 30px 30px;
+        opacity: 0.7;
+    }
+    
+    .about::after,
+    .projects::after {
+        background-size: 15px 15px;
+        opacity: 0.5;
+    }
 }
 
 .contact-content p {
     font-size: 1.2rem;
     color: #cccccc;
     margin-bottom: 2rem;
+    position: relative;
+    z-index: 2;
 }
 
 .contact-links {
     display: flex;
     justify-content: center;
     gap: 2rem;
+    position: relative;
+    z-index: 2;
 }
 
 .contact-link {
