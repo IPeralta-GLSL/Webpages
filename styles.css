@@ -274,39 +274,16 @@ body {
     right: 0;
     bottom: 0;
     background: 
-        linear-gradient(90deg, rgba(76, 175, 80, 0.1) 1px, transparent 1px),
-        linear-gradient(rgba(76, 175, 80, 0.1) 1px, transparent 1px);
+        linear-gradient(90deg, rgba(76, 175, 80, 0.08) 1px, transparent 1px),
+        linear-gradient(rgba(76, 175, 80, 0.08) 1px, transparent 1px);
     background-size: 50px 50px;
-    animation: grid3d 20s linear infinite;
+    animation: grid3d-simple 20s linear infinite;
     z-index: 1;
 }
 
-.about::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-        linear-gradient(45deg, rgba(76, 175, 80, 0.05) 25%, transparent 25%),
-        linear-gradient(-45deg, rgba(76, 175, 80, 0.05) 25%, transparent 25%),
-        linear-gradient(45deg, transparent 75%, rgba(76, 175, 80, 0.05) 75%),
-        linear-gradient(-45deg, transparent 75%, rgba(76, 175, 80, 0.05) 75%);
-    background-size: 20px 20px;
-    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
-    animation: grid3d-diagonal 25s linear infinite reverse;
-    z-index: 1;
-}
-
-@keyframes grid3d {
+@keyframes grid3d-simple {
     0% { transform: perspective(1000px) rotateX(60deg) translateY(0px); }
     100% { transform: perspective(1000px) rotateX(60deg) translateY(50px); }
-}
-
-@keyframes grid3d-diagonal {
-    0% { transform: translateX(0px) translateY(0px); }
-    100% { transform: translateX(20px) translateY(20px); }
 }
 
 .about-content {
@@ -641,7 +618,6 @@ body {
 }
 
 /* Grid 3D Floating Points */
-.about::after,
 .projects::after,
 .contact::after {
     opacity: 0.7;
@@ -664,13 +640,12 @@ body {
     .projects::before,
     .contact::before {
         background-size: 30px 30px;
-        opacity: 0.7;
+        opacity: 0.6;
     }
     
-    .about::after,
     .projects::after {
         background-size: 15px 15px;
-        opacity: 0.5;
+        opacity: 0.4;
     }
 }
 
