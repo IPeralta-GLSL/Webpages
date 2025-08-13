@@ -629,7 +629,7 @@ function displayShaderCode(code) {
         // Add syntax highlighting
         const syntaxHighlighted = highlightGLSL(line);
         const codeContent = document.createElement('span');
-        codeContent.innerHTML = syntaxHighlighted;
+        codeContent.innerHTML = syntaxHighlighted; // This should render the HTML
         codeLine.appendChild(codeContent);
 
         // Add animation delay
@@ -640,33 +640,29 @@ function displayShaderCode(code) {
 }
 
 function highlightGLSL(line) {
-    let highlighted = line;
+    // Escape HTML characters first
+    let highlighted = line
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
     
-    // Keywords
-    const keywords = ['precision', 'uniform', 'float', 'vec2', 'vec3', 'vec4', 'int', 'bool', 'void', 'return', 'if', 'else', 'for', 'while'];
-    keywords.forEach(keyword => {
-        const regex = new RegExp(`\\b${keyword}\\b`, 'g');
-        highlighted = highlighted.replace(regex, `<span class="code-keyword">${keyword}</span>`);
-    });
-
-    // Functions
-    const functions = ['fract', 'sin', 'cos', 'dot', 'mix', 'smoothstep', 'distance', 'pow', 'main', 'noise', 'smoothNoise', 'fractalNoise', 'cosmicBackground'];
-    functions.forEach(func => {
-        const regex = new RegExp(`\\b${func}\\b(?=\\s*\\()`, 'g');
-        highlighted = highlighted.replace(regex, `<span class="code-function">${func}</span>`);
-    });
-
-    // Numbers
-    highlighted = highlighted.replace(/\b\d+\.?\d*\b/g, '<span class="code-constant">$&</span>');
-
-    // Comments
+    // Comments (do this first to avoid highlighting inside comments)
     highlighted = highlighted.replace(/(\/\/.*$)/g, '<span class="code-comment">$1</span>');
 
-    // Variables (simple heuristic)
-    highlighted = highlighted.replace(/\b(time|resolution|uv|color|nebula\d*|flow\d*|glow|dist|vignette)\b/g, '<span class="code-variable">$1</span>');
-
-    // Brackets and operators
-    highlighted = highlighted.replace(/([{}()\[\];,+\-*\/=<>!&|])/g, '<span class="code-bracket">$1</span>');
+    // Only highlight if not inside a comment
+    if (!highlighted.includes('code-comment')) {
+        // Keywords
+        highlighted = highlighted.replace(/\b(precision|uniform|float|vec2|vec3|vec4|int|bool|void|return|if|else|for|while|mediump)\b/g, '<span class="code-keyword">$1</span>');
+        
+        // Functions (words followed by parentheses)
+        highlighted = highlighted.replace(/\b(fract|sin|cos|dot|mix|smoothstep|distance|pow|floor|main|noise|smoothNoise|fractalNoise|cosmicBackground)(?=\s*\()/g, '<span class="code-function">$1</span>');
+        
+        // Numbers
+        highlighted = highlighted.replace(/\b\d+\.?\d*\b/g, '<span class="code-constant">$&</span>');
+        
+        // Variables
+        highlighted = highlighted.replace(/\b(time|resolution|uv|color|nebula1|nebula2|nebula3|flow1|flow2|glow|dist|vignette|value|amplitude)\b/g, '<span class="code-variable">$1</span>');
+    }
 
     return highlighted;
 }
