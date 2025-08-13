@@ -43,6 +43,42 @@ body {
     align-items: center;
 }
 
+.audio-control {
+    margin-left: auto;
+    margin-right: 1rem;
+}
+
+.audio-btn {
+    background: rgba(76, 175, 80, 0.1);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #4CAF50;
+}
+
+.audio-btn:hover {
+    background: rgba(76, 175, 80, 0.2);
+    border-color: rgba(76, 175, 80, 0.5);
+    transform: scale(1.05);
+}
+
+.audio-btn.muted {
+    background: rgba(255, 0, 0, 0.1);
+    border-color: rgba(255, 0, 0, 0.3);
+    color: #ff4444;
+}
+
+.audio-btn.muted:hover {
+    background: rgba(255, 0, 0, 0.2);
+    border-color: rgba(255, 0, 0, 0.5);
+}
+
 .nav-logo .logo-text {
     font-size: 1.5rem;
     font-weight: 700;
@@ -964,6 +1000,15 @@ body {
 
     .nav-menu.active {
         left: 0;
+    }
+
+    .audio-control {
+        margin-right: 0.5rem;
+    }
+
+    .audio-btn {
+        width: 35px;
+        height: 35px;
     }
 
     .hero-content {

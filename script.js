@@ -590,7 +590,75 @@ class CosmicShader {
 document.addEventListener('DOMContentLoaded', () => {
     new CosmicShader();
     loadFragmentShaderCode();
+    initAudioControl();
 });
+
+// Audio control functionality
+function initAudioControl() {
+    const audioToggle = document.getElementById('audioToggle');
+    const audioIcon = document.getElementById('audioIcon');
+    const bgMusic = document.getElementById('bgMusic');
+    
+    if (!audioToggle || !audioIcon || !bgMusic) return;
+
+    let isPlaying = false;
+
+    // Function to start audio (respects browser autoplay policies)
+    function startAudio() {
+        bgMusic.volume = 0.3; // Set volume to 30%
+        
+        const playPromise = bgMusic.play();
+        
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                isPlaying = true;
+                audioIcon.className = 'fas fa-volume-up';
+                audioToggle.classList.remove('muted');
+                audioToggle.title = 'Mute ambient music';
+            }).catch(error => {
+                // Auto-play was prevented
+                console.log('Auto-play prevented:', error);
+                isPlaying = false;
+                audioIcon.className = 'fas fa-volume-mute';
+                audioToggle.classList.add('muted');
+                audioToggle.title = 'Play ambient music';
+            });
+        }
+    }
+
+    // Function to toggle audio
+    function toggleAudio() {
+        if (isPlaying) {
+            bgMusic.pause();
+            isPlaying = false;
+            audioIcon.className = 'fas fa-volume-mute';
+            audioToggle.classList.add('muted');
+            audioToggle.title = 'Play ambient music';
+        } else {
+            startAudio();
+        }
+    }
+
+    // Add click event listener
+    audioToggle.addEventListener('click', toggleAudio);
+
+    // Try to start audio automatically after user interaction
+    function startAfterInteraction() {
+        startAudio();
+        // Remove listeners after first interaction
+        document.removeEventListener('click', startAfterInteraction);
+        document.removeEventListener('keydown', startAfterInteraction);
+        document.removeEventListener('scroll', startAfterInteraction);
+    }
+
+    // Wait for any user interaction to start audio
+    document.addEventListener('click', startAfterInteraction);
+    document.addEventListener('keydown', startAfterInteraction);
+    document.addEventListener('scroll', startAfterInteraction);
+
+    // Also try to start immediately (will work if autoplay is allowed)
+    setTimeout(startAudio, 1000);
+}
 
 // Load and display fragment shader code
 async function loadFragmentShaderCode() {
