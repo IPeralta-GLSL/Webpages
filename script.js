@@ -598,16 +598,32 @@ function initAudioControl() {
     const audioToggle = document.getElementById('audioToggle');
     const audioIcon = document.getElementById('audioIcon');
     const bgMusic = document.getElementById('bgMusic');
+    const volumeSlider = document.getElementById('volumeSlider');
     
-    if (!audioToggle || !audioIcon || !bgMusic) return;
+    if (!audioToggle || !audioIcon || !bgMusic || !volumeSlider) return;
 
     let isPlaying = false;
+
+    // Set initial volume
+    bgMusic.volume = 0.4;
+
+    // Function to update volume icon based on volume level
+    function updateVolumeIcon(volume) {
+        if (volume === 0 || !isPlaying) {
+            audioIcon.className = 'fas fa-volume-mute';
+        } else if (volume < 0.3) {
+            audioIcon.className = 'fas fa-volume-down';
+        } else if (volume < 0.7) {
+            audioIcon.className = 'fas fa-volume-up';
+        } else {
+            audioIcon.className = 'fas fa-volume-up';
+        }
+    }
 
     // Function to start audio with multiple attempts
     function startAudio() {
         if (isPlaying) return;
         
-        bgMusic.volume = 0.4; // Set volume to 40%
         bgMusic.currentTime = 0; // Start from beginning
         
         const playPromise = bgMusic.play();
@@ -615,9 +631,9 @@ function initAudioControl() {
         if (playPromise !== undefined) {
             playPromise.then(() => {
                 isPlaying = true;
-                audioIcon.className = 'fas fa-volume-up';
                 audioToggle.classList.remove('muted');
                 audioToggle.title = 'Pause ambient music';
+                updateVolumeIcon(bgMusic.volume);
                 console.log('Audio started successfully');
             }).catch(error => {
                 console.log('Auto-play attempt failed:', error);
@@ -641,6 +657,20 @@ function initAudioControl() {
             startAudio();
         }
     }
+
+    // Volume slider event listener
+    volumeSlider.addEventListener('input', (e) => {
+        const volume = e.target.value / 100;
+        bgMusic.volume = volume;
+        updateVolumeIcon(volume);
+        
+        // If volume is 0, show muted state but don't stop playback
+        if (volume === 0) {
+            audioToggle.classList.add('muted');
+        } else {
+            audioToggle.classList.remove('muted');
+        }
+    });
 
     // Add click event listener
     audioToggle.addEventListener('click', toggleAudio);
@@ -682,6 +712,9 @@ function initAudioControl() {
             attemptAutoStart();
         }
     });
+
+    // Initialize volume icon
+    updateVolumeIcon(bgMusic.volume);
 }
 
 // Load and display fragment shader code
