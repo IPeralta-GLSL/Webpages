@@ -41,42 +41,61 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .audio-control {
     margin-left: auto;
-    margin-right: 1rem;
+    order: 3;
 }
 
 .audio-btn {
-    background: rgba(76, 175, 80, 0.1);
-    border: 1px solid rgba(76, 175, 80, 0.3);
+    background: rgba(76, 175, 80, 0.15);
+    border: 1px solid rgba(76, 175, 80, 0.4);
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
     color: #4CAF50;
+    font-size: 16px;
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.2);
 }
 
 .audio-btn:hover {
-    background: rgba(76, 175, 80, 0.2);
-    border-color: rgba(76, 175, 80, 0.5);
+    background: rgba(76, 175, 80, 0.25);
+    border-color: rgba(76, 175, 80, 0.6);
     transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
 }
 
 .audio-btn.muted {
-    background: rgba(255, 0, 0, 0.1);
-    border-color: rgba(255, 0, 0, 0.3);
+    background: rgba(255, 68, 68, 0.15);
+    border-color: rgba(255, 68, 68, 0.4);
     color: #ff4444;
+    box-shadow: 0 2px 8px rgba(255, 68, 68, 0.2);
 }
 
 .audio-btn.muted:hover {
-    background: rgba(255, 0, 0, 0.2);
-    border-color: rgba(255, 0, 0, 0.5);
+    background: rgba(255, 68, 68, 0.25);
+    border-color: rgba(255, 68, 68, 0.6);
+    box-shadow: 0 4px 12px rgba(255, 68, 68, 0.3);
+}
+
+.hamburger {
+    order: 4;
 }
 
 .nav-logo .logo-text {
@@ -983,6 +1002,7 @@ body {
 @media (max-width: 768px) {
     .hamburger {
         display: flex;
+        order: 4;
     }
 
     .nav-menu {
@@ -996,19 +1016,32 @@ body {
         transition: 0.3s;
         backdrop-filter: blur(10px);
         padding: 2rem 0;
+        transform: none;
+        position: fixed;
     }
 
     .nav-menu.active {
         left: 0;
     }
 
+    .nav-container {
+        justify-content: space-between;
+    }
+
+    .nav-logo {
+        order: 1;
+    }
+
     .audio-control {
-        margin-right: 0.5rem;
+        order: 2;
+        margin-left: 0;
+        margin-right: 1rem;
     }
 
     .audio-btn {
-        width: 35px;
-        height: 35px;
+        width: 38px;
+        height: 38px;
+        font-size: 14px;
     }
 
     .hero-content {

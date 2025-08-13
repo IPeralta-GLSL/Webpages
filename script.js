@@ -603,9 +603,12 @@ function initAudioControl() {
 
     let isPlaying = false;
 
-    // Function to start audio (respects browser autoplay policies)
+    // Function to start audio with multiple attempts
     function startAudio() {
-        bgMusic.volume = 0.3; // Set volume to 30%
+        if (isPlaying) return;
+        
+        bgMusic.volume = 0.4; // Set volume to 40%
+        bgMusic.currentTime = 0; // Start from beginning
         
         const playPromise = bgMusic.play();
         
@@ -614,10 +617,10 @@ function initAudioControl() {
                 isPlaying = true;
                 audioIcon.className = 'fas fa-volume-up';
                 audioToggle.classList.remove('muted');
-                audioToggle.title = 'Mute ambient music';
+                audioToggle.title = 'Pause ambient music';
+                console.log('Audio started successfully');
             }).catch(error => {
-                // Auto-play was prevented
-                console.log('Auto-play prevented:', error);
+                console.log('Auto-play attempt failed:', error);
                 isPlaying = false;
                 audioIcon.className = 'fas fa-volume-mute';
                 audioToggle.classList.add('muted');
@@ -642,22 +645,43 @@ function initAudioControl() {
     // Add click event listener
     audioToggle.addEventListener('click', toggleAudio);
 
-    // Try to start audio automatically after user interaction
-    function startAfterInteraction() {
-        startAudio();
-        // Remove listeners after first interaction
-        document.removeEventListener('click', startAfterInteraction);
-        document.removeEventListener('keydown', startAfterInteraction);
-        document.removeEventListener('scroll', startAfterInteraction);
+    // Aggressive auto-start attempts
+    function attemptAutoStart() {
+        if (!isPlaying) {
+            startAudio();
+        }
     }
 
-    // Wait for any user interaction to start audio
-    document.addEventListener('click', startAfterInteraction);
-    document.addEventListener('keydown', startAfterInteraction);
-    document.addEventListener('scroll', startAfterInteraction);
+    // Multiple trigger events for autoplay
+    const events = ['click', 'keydown', 'touchstart', 'scroll', 'mousemove'];
+    
+    function startAfterInteraction(event) {
+        attemptAutoStart();
+        // Remove all event listeners after first successful interaction
+        events.forEach(eventType => {
+            document.removeEventListener(eventType, startAfterInteraction);
+        });
+    }
 
-    // Also try to start immediately (will work if autoplay is allowed)
-    setTimeout(startAudio, 1000);
+    // Add listeners for user interaction
+    events.forEach(eventType => {
+        document.addEventListener(eventType, startAfterInteraction, { once: true });
+    });
+
+    // Try immediate autoplay (works on some browsers/contexts)
+    setTimeout(attemptAutoStart, 500);
+    setTimeout(attemptAutoStart, 1000);
+    setTimeout(attemptAutoStart, 2000);
+
+    // Also try when page fully loads
+    window.addEventListener('load', attemptAutoStart);
+    
+    // Try when page becomes visible
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden && !isPlaying) {
+            attemptAutoStart();
+        }
+    });
 }
 
 // Load and display fragment shader code
