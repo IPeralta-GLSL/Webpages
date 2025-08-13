@@ -675,44 +675,6 @@ function initAudioControl() {
     // Add click event listener
     audioToggle.addEventListener('click', toggleAudio);
 
-    // Aggressive auto-start attempts
-    function attemptAutoStart() {
-        if (!isPlaying) {
-            startAudio();
-        }
-    }
-
-    // Multiple trigger events for autoplay
-    const events = ['click', 'keydown', 'touchstart', 'scroll', 'mousemove'];
-    
-    function startAfterInteraction(event) {
-        attemptAutoStart();
-        // Remove all event listeners after first successful interaction
-        events.forEach(eventType => {
-            document.removeEventListener(eventType, startAfterInteraction);
-        });
-    }
-
-    // Add listeners for user interaction
-    events.forEach(eventType => {
-        document.addEventListener(eventType, startAfterInteraction, { once: true });
-    });
-
-    // Try immediate autoplay (works on some browsers/contexts)
-    setTimeout(attemptAutoStart, 500);
-    setTimeout(attemptAutoStart, 1000);
-    setTimeout(attemptAutoStart, 2000);
-
-    // Also try when page fully loads
-    window.addEventListener('load', attemptAutoStart);
-    
-    // Try when page becomes visible
-    document.addEventListener('visibilitychange', () => {
-        if (!document.hidden && !isPlaying) {
-            attemptAutoStart();
-        }
-    });
-
     // Initialize volume icon
     updateVolumeIcon(bgMusic.volume);
 }
