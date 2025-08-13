@@ -462,3 +462,131 @@ function createParticles() {
 
 // Initialize particles
 createParticles();
+
+// WebGL Cosmic Background Shader
+class CosmicShader {
+    constructor() {
+        this.canvas = document.getElementById('shader-canvas');
+        this.gl = null;
+        this.program = null;
+        this.startTime = Date.now();
+        this.init();
+    }
+
+    async init() {
+        this.gl = this.canvas.getContext('webgl') || this.canvas.getContext('experimental-webgl');
+        if (!this.gl) {
+            console.warn('WebGL not supported, falling back to CSS background');
+            return;
+        }
+
+        this.resizeCanvas();
+        window.addEventListener('resize', () => this.resizeCanvas());
+
+        await this.setupShaders();
+        this.render();
+    }
+
+    resizeCanvas() {
+        const rect = this.canvas.parentElement.getBoundingClientRect();
+        this.canvas.width = rect.width;
+        this.canvas.height = rect.height;
+        if (this.gl) {
+            this.gl.viewport(0, 0, this.canvas.width, this.canvas.height);
+        }
+    }
+
+    async setupShaders() {
+        try {
+            // Load shader files
+            const vertexShaderSource = await this.loadShaderFile('shaders/vertex.glsl');
+            const fragmentShaderSource = await this.loadShaderFile('shaders/fragment.glsl');
+
+            const vertexShader = this.createShader(this.gl.VERTEX_SHADER, vertexShaderSource);
+            const fragmentShader = this.createShader(this.gl.FRAGMENT_SHADER, fragmentShaderSource);
+
+            this.program = this.createProgram(vertexShader, fragmentShader);
+            this.gl.useProgram(this.program);
+
+            // Create vertex buffer
+            const positions = new Float32Array([
+                -1, -1,
+                 1, -1,
+                -1,  1,
+                 1,  1,
+            ]);
+
+            const positionBuffer = this.gl.createBuffer();
+            this.gl.bindBuffer(this.gl.ARRAY_BUFFER, positionBuffer);
+            this.gl.bufferData(this.gl.ARRAY_BUFFER, positions, this.gl.STATIC_DRAW);
+
+            const positionAttribute = this.gl.getAttribLocation(this.program, 'position');
+            this.gl.enableVertexAttribArray(positionAttribute);
+            this.gl.vertexAttribPointer(positionAttribute, 2, this.gl.FLOAT, false, 0, 0);
+
+            // Get uniform locations
+            this.timeUniform = this.gl.getUniformLocation(this.program, 'time');
+            this.resolutionUniform = this.gl.getUniformLocation(this.program, 'resolution');
+        } catch (error) {
+            console.error('Error loading shaders:', error);
+        }
+    }
+
+    async loadShaderFile(url) {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Failed to load shader: ${url}`);
+        }
+        return await response.text();
+    }
+
+    createShader(type, source) {
+        const shader = this.gl.createShader(type);
+        this.gl.shaderSource(shader, source);
+        this.gl.compileShader(shader);
+
+        if (!this.gl.getShaderParameter(shader, this.gl.COMPILE_STATUS)) {
+            console.error('Shader compilation error:', this.gl.getShaderInfoLog(shader));
+            this.gl.deleteShader(shader);
+            return null;
+        }
+
+        return shader;
+    }
+
+    createProgram(vertexShader, fragmentShader) {
+        const program = this.gl.createProgram();
+        this.gl.attachShader(program, vertexShader);
+        this.gl.attachShader(program, fragmentShader);
+        this.gl.linkProgram(program);
+
+        if (!this.gl.getProgramParameter(program, this.gl.LINK_STATUS)) {
+            console.error('Program linking error:', this.gl.getProgramInfoLog(program));
+            this.gl.deleteProgram(program);
+            return null;
+        }
+
+        return program;
+    }
+
+    render() {
+        if (!this.gl || !this.program) return;
+
+        const currentTime = (Date.now() - this.startTime) / 1000;
+
+        this.gl.uniform1f(this.timeUniform, currentTime);
+        this.gl.uniform2f(this.resolutionUniform, this.canvas.width, this.canvas.height);
+
+        this.gl.clearColor(0.02, 0.02, 0.08, 1.0);
+        this.gl.clear(this.gl.COLOR_BUFFER_BIT);
+
+        this.gl.drawArrays(this.gl.TRIANGLE_STRIP, 0, 4);
+
+        requestAnimationFrame(() => this.render());
+    }
+}
+
+// Initialize shader when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    new CosmicShader();
+});
