@@ -589,4 +589,84 @@ class CosmicShader {
 // Initialize shader when page loads
 document.addEventListener('DOMContentLoaded', () => {
     new CosmicShader();
+    loadFragmentShaderCode();
 });
+
+// Load and display fragment shader code
+async function loadFragmentShaderCode() {
+    try {
+        const response = await fetch('shaders/fragment.glsl');
+        const shaderCode = await response.text();
+        displayShaderCode(shaderCode);
+    } catch (error) {
+        console.warn('Could not load fragment shader file:', error);
+    }
+}
+
+function displayShaderCode(code) {
+    const codeAnimation = document.querySelector('.code-animation');
+    if (!codeAnimation) return;
+
+    // Clear existing content
+    codeAnimation.innerHTML = '';
+
+    // Split code into lines
+    const lines = code.split('\n');
+    
+    lines.forEach((line, index) => {
+        const codeLine = document.createElement('div');
+        codeLine.className = 'code-line';
+        if (line.startsWith('    ') || line.startsWith('\t')) {
+            codeLine.classList.add('indent');
+        }
+        
+        // Add line number
+        const lineNumber = document.createElement('span');
+        lineNumber.className = 'line-number';
+        lineNumber.textContent = (index + 1).toString();
+        codeLine.appendChild(lineNumber);
+
+        // Add syntax highlighting
+        const syntaxHighlighted = highlightGLSL(line);
+        const codeContent = document.createElement('span');
+        codeContent.innerHTML = syntaxHighlighted;
+        codeLine.appendChild(codeContent);
+
+        // Add animation delay
+        codeLine.style.animationDelay = `${index * 0.05}s`;
+        
+        codeAnimation.appendChild(codeLine);
+    });
+}
+
+function highlightGLSL(line) {
+    let highlighted = line;
+    
+    // Keywords
+    const keywords = ['precision', 'uniform', 'float', 'vec2', 'vec3', 'vec4', 'int', 'bool', 'void', 'return', 'if', 'else', 'for', 'while'];
+    keywords.forEach(keyword => {
+        const regex = new RegExp(`\\b${keyword}\\b`, 'g');
+        highlighted = highlighted.replace(regex, `<span class="code-keyword">${keyword}</span>`);
+    });
+
+    // Functions
+    const functions = ['fract', 'sin', 'cos', 'dot', 'mix', 'smoothstep', 'distance', 'pow', 'main', 'noise', 'smoothNoise', 'fractalNoise', 'cosmicBackground'];
+    functions.forEach(func => {
+        const regex = new RegExp(`\\b${func}\\b(?=\\s*\\()`, 'g');
+        highlighted = highlighted.replace(regex, `<span class="code-function">${func}</span>`);
+    });
+
+    // Numbers
+    highlighted = highlighted.replace(/\b\d+\.?\d*\b/g, '<span class="code-constant">$&</span>');
+
+    // Comments
+    highlighted = highlighted.replace(/(\/\/.*$)/g, '<span class="code-comment">$1</span>');
+
+    // Variables (simple heuristic)
+    highlighted = highlighted.replace(/\b(time|resolution|uv|color|nebula\d*|flow\d*|glow|dist|vignette)\b/g, '<span class="code-variable">$1</span>');
+
+    // Brackets and operators
+    highlighted = highlighted.replace(/([{}()\[\];,+\-*\/=<>!&|])/g, '<span class="code-bracket">$1</span>');
+
+    return highlighted;
+}
