@@ -605,7 +605,7 @@ function initAudioControl() {
     let isPlaying = false;
 
     // Set initial volume
-    bgMusic.volume = 0.4;
+    bgMusic.volume = 0.2;
 
     // Function to update volume icon based on volume level
     function updateVolumeIcon(volume) {
