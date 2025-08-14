@@ -61,7 +61,7 @@
         "title": "Vulcano",
         "subtitle": "Turn-based multiplayer NFT game",
         "image": "Portfolio/Vulkano/vlcsnap-2023-02-17-22h33m14s665.png",
-        "tags": ["Unreal Engine", "C++", "Amazon GameLift", "Easy Anti-Cheat", "Unreal Engine 5", "Blockchain", "NFT"],
+        "tags": ["Unreal Engine 5", "C++", "Amazon GameLift", "Easy Anti-Cheat", "Blockchain"],
         "description": "A complete multiplayer NFT-based strategy game built in Unreal Engine. Vulcano features turn-based gameplay mechanics with blockchain integration for unique digital assets:\n\n• Turn-based strategy gameplay with card mechanics\n• NFT integration for unique collectible cards\n• Real-time multiplayer using Amazon GameLift\n• Anti-cheat protection with Easy Anti-Cheat\n• Cross-platform compatibility\n• Marketplace for trading NFT cards\n• Ranking and tournament systems\n• Custom game engine optimizations\n\nThe game combines traditional strategy gameplay with modern blockchain technology, creating a unique gaming experience where players truly own their in-game assets.",
         "images": [
             "Portfolio/Vulkano/vlcsnap-2023-02-17-22h33m14s665.png",
@@ -69,25 +69,20 @@
             "Portfolio/Vulkano/Vulcano.jpg"
         ],
         "links": [
-            { "name": "Game Website", "url": "https://www.vulcano.gg/" },
-            { "name": "Marketplace", "url": "#" },
-            { "name": "Game Trailer", "url": "#" }
+            { "name": "Game Website", "url": "https://www.vulcano.gg/" }
         ]
         ,
-        "video": {
-            "type": "youtube",
-            "url": "https://www.youtube.com/watch?v=uiXwBJeAoow"
-        }
+        "video": "https://www.youtube.com/watch?v=uiXwBJeAoow"
     },
     {
         "id": 5,
         "title": "Los asombrosos viajes de Zamba y Nina por la Argentina",
         "subtitle": "Educational interactive series for children",
-        "image": "Portfolio/zamba/Pakapaka - 10 - \"Los asombrosos viajes de Zamba y Nina por la Argentina - Buenos Aires - Pakapaka y TV Pública [jdvRatcp-5E - 916x515 - 20m12s].png",
-        "tags": ["Unreal Engine", "Unreal Engine 4", "Animation", "UI/UX", "Educational Design"],
+        "image": "Portfolio/zamba/Zamba.png",
+        "tags": ["Unreal Engine", "Animation", "Educational Design"],
         "description": "An educational interactive experience developed for Pakapaka (Public Television Argentina) featuring the beloved characters Zamba and Nina. This project combines entertainment with education to teach children about Argentine geography and culture:\n\n• Interactive storytelling with educational content\n• Real-time 3D environments representing Argentine regions\n• Character animation and voice acting integration\n• Mini-games and interactive elements\n• Educational content about Argentine history and geography\n• Child-friendly user interface design\n• Accessibility features for diverse audiences\n• Integration with broadcast television content\n\nThe project was developed using Unreal Engine to create immersive, educational experiences that engage children while teaching them about their country's rich cultural heritage.",
         "images": [
-            "Portfolio/zamba/Pakapaka - 10 - \"Los asombrosos viajes de Zamba y Nina por la Argentina - Buenos Aires - Pakapaka y TV Pública [jdvRatcp-5E - 916x515 - 20m12s].png",
+            "Portfolio/zamba/Zamba.png",
             "Portfolio/zamba/zamba-y-ninapng.webp",
             "Portfolio/zamba/Zamba.webp"
         ],
@@ -95,7 +90,8 @@
             { "name": "Pakapaka Official", "url": "#" },
             { "name": "Educational Content", "url": "#" },
             { "name": "Behind the Scenes", "url": "#" }
-        ]
+        ],
+        "video": "https://youtu.be/ekyM1b6SCuY"
     },
     {
         "id": 6,

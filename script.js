@@ -139,8 +139,12 @@ function openProjectModal(projectId) {
     // Construir un array de "media" (video primero si existe, luego imágenes)
     let mediaItems = [];
     let videoId = null;
-    if (project.video && project.video.type === 'youtube' && project.video.url) {
-        const match = project.video.url.match(/[?&]v=([^&#]+)/);
+    if (project.video) {
+        // Soporte para formatos: youtube.com/watch?v= y youtu.be/
+        let match = project.video.match(/[?&]v=([^&#]+)/); // youtube.com/watch?v=
+        if (!match) {
+            match = project.video.match(/youtu\.be\/([^?&#]+)/); // youtu.be/
+        }
         if (match) videoId = match[1];
         if (videoId) {
             mediaItems.push({ type: 'video', videoId });
