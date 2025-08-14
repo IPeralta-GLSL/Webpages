@@ -49,18 +49,20 @@ vec3 cosmicBackground(vec2 uv) {
     vec3 flowColor = vec3(0.0, 0.8, 1.0) * (flow1 + flow2) * 0.05 * smoothstep(0.3, 0.7, nebula1);
     color += flowColor;
     
-    float starField = noise(uv * 80.0); // Reduced from 120 to make even fewer stars
+    float starField = noise(uv * 80.0);
+    float starIntensity = smoothstep(0.98, 1.0, starField);
     
     float twinkle = sin(time * 4.0 + noise(uv * 50.0) * 6.28) * 0.5 + 0.5;
     starIntensity *= twinkle;
     
     vec3 starColor = mix(vec3(0.8, 1.0, 1.0), vec3(0.4, 0.8, 1.0), noise(uv * 40.0));
-    color += starColor * starIntensity * 2.0; // Increased brightness even more
+    color += starColor * starIntensity * 2.0;
     
-    float bigStars = noise(uv * 15.0); // Reduced from 25 to make much bigger stars
+    float bigStars = noise(uv * 15.0);
+    float bigStarIntensity = smoothstep(0.97, 1.0, bigStars);
     float bigTwinkle = sin(time * 1.5 + noise(uv * 10.0) * 6.28) * 0.5 + 0.5;
     vec3 bigStarColor = vec3(0.5, 0.9, 1.0);
-    color += bigStarColor * bigStarIntensity * bigTwinkle * 3.0; // Increased brightness
+    color += bigStarColor * bigStarIntensity * bigTwinkle * 3.0;
     
     float glow = fractalNoise(uv * 0.5 + time * 0.003);
     color += vec3(0.1, 0.3, 0.6) * glow * 0.1;
