@@ -1030,6 +1030,22 @@ body {
     border-color: #4CAF50;
 }
 
+.thumbnail-video {
+    width: 80px;
+    height: 60px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+    position: relative;
+    display: inline-block;
+}
+
+.thumbnail-video:hover,
+.thumbnail-video.active {
+    border-color: #4CAF50;
+}
+
 .modal-description {
     color: #cccccc;
     line-height: 1.8;

@@ -134,24 +134,101 @@ function openProjectModal(projectId) {
     modalTitle.textContent = project.title;
     modalDescription.textContent = project.description;
     
-    // Set main image
-    modalMainImage.src = project.images[0];
-    modalMainImage.alt = project.title;
-    
-    // Create thumbnails
+
+    // --- Galería combinada de imágenes y video estilo Steam ---
+    // Construir un array de "media" (video primero si existe, luego imágenes)
+    let mediaItems = [];
+    let videoId = null;
+    if (project.video && project.video.type === 'youtube' && project.video.url) {
+        const match = project.video.url.match(/[?&]v=([^&#]+)/);
+        if (match) videoId = match[1];
+        if (videoId) {
+            mediaItems.push({ type: 'video', videoId });
+        }
+    }
+    project.images.forEach(img => mediaItems.push({ type: 'image', src: img }));
+
+    // Estado: qué media está activa
+    let activeMediaIndex = 0;
+
+    // Render principal (main image/video)
+    function renderMainMedia(idx) {
+        const media = mediaItems[idx];
+        const mainImageDiv = document.querySelector('.main-image');
+        if (!mainImageDiv) return;
+        
+        mainImageDiv.innerHTML = '';
+        if (media.type === 'image') {
+            const img = document.createElement('img');
+            img.id = 'modalMainImage';
+            img.src = media.src;
+            img.alt = project.title;
+            img.style.width = '100%';
+            img.style.height = 'auto';
+            img.style.objectFit = 'contain';
+            mainImageDiv.appendChild(img);
+        } else if (media.type === 'video') {
+            const iframe = document.createElement('iframe');
+            iframe.width = '100%';
+            iframe.height = '315';
+            iframe.src = `https://www.youtube.com/embed/${media.videoId}`;
+            iframe.title = 'YouTube video player';
+            iframe.frameBorder = '0';
+            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+            iframe.allowFullscreen = true;
+            iframe.style.minHeight = '315px';
+            mainImageDiv.appendChild(iframe);
+        }
+    }
+
+    // Render thumbnails
     modalThumbnails.innerHTML = '';
-    project.images.forEach((image, index) => {
-        const thumbnail = document.createElement('img');
-        thumbnail.src = image;
-        thumbnail.alt = `${project.title} - Image ${index + 1}`;
-        thumbnail.className = `thumbnail ${index === 0 ? 'active' : ''}`;
-        thumbnail.addEventListener('click', () => {
-            modalMainImage.src = image;
+    mediaItems.forEach((media, idx) => {
+        let thumb;
+        if (media.type === 'image') {
+            thumb = document.createElement('img');
+            thumb.src = media.src;
+            thumb.alt = `${project.title} - Image ${idx + 1}`;
+        } else if (media.type === 'video') {
+            thumb = document.createElement('div');
+            thumb.className = 'thumbnail-video';
+            thumb.style.position = 'relative';
+            thumb.style.display = 'inline-block';
+            thumb.style.width = '80px';
+            thumb.style.height = '60px';
+            thumb.style.cursor = 'pointer';
+            // Miniatura de YouTube
+            const img = document.createElement('img');
+            img.src = `https://img.youtube.com/vi/${media.videoId}/mqdefault.jpg`;
+            img.alt = `${project.title} - Video`;
+            img.style.width = '100%';
+            img.style.height = '100%';
+            img.style.objectFit = 'cover';
+            thumb.appendChild(img);
+            // Icono de play
+            const playIcon = document.createElement('span');
+            playIcon.innerHTML = '&#9658;';
+            playIcon.style.position = 'absolute';
+            playIcon.style.top = '50%';
+            playIcon.style.left = '50%';
+            playIcon.style.transform = 'translate(-50%, -50%)';
+            playIcon.style.fontSize = '2em';
+            playIcon.style.color = 'white';
+            playIcon.style.textShadow = '0 0 8px black';
+            thumb.appendChild(playIcon);
+        }
+        thumb.className = `thumbnail${idx === activeMediaIndex ? ' active' : ''}${media.type === 'video' ? ' thumbnail-video' : ''}`;
+        thumb.addEventListener('click', () => {
+            activeMediaIndex = idx;
+            renderMainMedia(idx);
             document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
-            thumbnail.classList.add('active');
+            thumb.classList.add('active');
         });
-        modalThumbnails.appendChild(thumbnail);
+        modalThumbnails.appendChild(thumb);
     });
+
+    // Render inicial
+    renderMainMedia(activeMediaIndex);
     
     // Set technologies (now using tags)
     modalTech.innerHTML = `

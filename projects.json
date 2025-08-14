@@ -69,10 +69,15 @@
             "Portfolio/Vulkano/Vulcano.jpg"
         ],
         "links": [
-            { "name": "Game Website", "url": "#" },
+            { "name": "Game Website", "url": "https://www.vulcano.gg/" },
             { "name": "Marketplace", "url": "#" },
             { "name": "Game Trailer", "url": "#" }
         ]
+        ,
+        "video": {
+            "type": "youtube",
+            "url": "https://www.youtube.com/watch?v=uiXwBJeAoow"
+        }
     },
     {
         "id": 5,
