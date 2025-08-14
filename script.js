@@ -153,11 +153,11 @@ function openProjectModal(projectId) {
         modalThumbnails.appendChild(thumbnail);
     });
     
-    // Set technologies
+    // Set technologies (now using tags)
     modalTech.innerHTML = `
-        <h4>Technologies Used:</h4>
+        <h4>Technologies & Tags:</h4>
         <div class="skill-tags">
-            ${project.technologies.map(tech => `<span class="skill-tag">${tech}</span>`).join('')}
+            ${project.tags.map(tag => `<span class="skill-tag">${tag}</span>`).join('')}
         </div>
     `;
     
