@@ -1,171 +1,10 @@
-// Project data with detailed information
-const projectsData = {
-    1: {
-        title: "Custom 3D Renderer",
-        description: `A high-performance 3D rendering engine built from scratch using modern OpenGL and C++. This project demonstrates advanced graphics programming techniques including:
-
-• Physically Based Rendering (PBR) pipeline
-• Real-time shadows with cascade shadow mapping
-• Deferred rendering for optimal performance
-• Post-processing effects (SSAO, Bloom, Tone mapping)
-• Model loading with Assimp integration
-• Custom shader management system
-• Frustum culling and occlusion culling optimization
-
-The renderer supports various lighting models, material systems, and provides a flexible architecture for creating complex 3D scenes. Performance optimizations include instanced rendering, GPU-driven rendering, and efficient memory management.`,
-        technologies: ["C++", "OpenGL 4.6", "GLSL", "Assimp", "GLM", "GLFW"],
-        images: [
-            "https://via.placeholder.com/800x600/1a1a2e/ffffff?text=PBR+Rendering",
-            "https://via.placeholder.com/800x600/1a1a2e/64ffda?text=Shadow+Mapping",
-            "https://via.placeholder.com/800x600/1a1a2e/ffffff?text=Post+Processing",
-            "https://via.placeholder.com/800x600/1a1a2e/64ffda?text=Material+System"
-        ],
-        links: [
-            { name: "GitHub Repository", url: "#" },
-            { name: "Live Demo", url: "#" },
-            { name: "Documentation", url: "#" }
-        ]
-    },
-    2: {
-        title: "Physics Engine",
-        description: `A comprehensive physics simulation engine designed for real-time applications. The engine implements advanced collision detection algorithms and supports various types of rigid body dynamics:
-
-• Broad-phase collision detection using spatial partitioning
-• Narrow-phase collision with SAT and GJK algorithms  
-• Constraint-based physics solver with iterative methods
-• CUDA acceleration for massive particle simulations
-• Fluid dynamics simulation with SPH (Smoothed Particle Hydrodynamics)
-• Soft body physics with mass-spring systems
-• Integration with graphics pipeline for visualization
-
-The engine is optimized for performance with multi-threading support and GPU acceleration where applicable. It includes debugging tools and visualization features to help developers understand and tune physics behaviors.`,
-        technologies: ["C++", "CUDA", "OpenMP", "Eigen", "ImGui"],
-        images: [
-            "https://via.placeholder.com/800x600/16213e/ffffff?text=Collision+Detection",
-            "https://via.placeholder.com/800x600/16213e/64ffda?text=Rigid+Body+Dynamics",
-            "https://via.placeholder.com/800x600/16213e/ffffff?text=Fluid+Simulation",
-            "https://via.placeholder.com/800x600/16213e/64ffda?text=Soft+Body+Physics"
-        ],
-        links: [
-            { name: "GitHub Repository", url: "#" },
-            { name: "Technical Paper", url: "#" },
-            { name: "Performance Benchmarks", url: "#" }
-        ]
-    },
-    3: {
-        title: "Real-time Shader Editor",
-        description: `An advanced shader development environment that provides real-time editing and preview capabilities. This tool is designed to streamline the shader development workflow:
-
-• Live shader compilation and error reporting
-• Node-based visual shader editor
-• Real-time preview with customizable 3D scenes
-• Hot-reload functionality for rapid iteration
-• Support for multiple shading languages (HLSL, GLSL)
-• Built-in library of common shader patterns
-• Performance profiling and optimization suggestions
-• Export functionality for various game engines
-
-The editor features a modern interface built with C# and WPF, utilizing DirectX for rendering. It includes debugging tools, visual node graphs for complex shader logic, and integration with popular game engines.`,
-        technologies: ["C#", "DirectX 11", "HLSL", "WPF", ".NET", "SharpDX"],
-        images: [
-            "https://via.placeholder.com/800x600/0f3460/ffffff?text=Shader+Editor+UI",
-            "https://via.placeholder.com/800x600/0f3460/64ffda?text=Node+Graph+System",
-            "https://via.placeholder.com/800x600/0f3460/ffffff?text=Real-time+Preview",
-            "https://via.placeholder.com/800x600/0f3460/64ffda?text=Performance+Tools"
-        ],
-        links: [
-            { name: "Download Tool", url: "#" },
-            { name: "User Guide", url: "#" },
-            { name: "Shader Library", url: "#" }
-        ]
-    },
-    4: {
-        title: "Indie Game Engine",
-        description: `A complete game engine built specifically for indie developers, featuring a modern architecture and user-friendly editor. The engine focuses on ease of use while maintaining high performance:
-
-• Vulkan-based rendering backend for maximum performance
-• Component-based entity system (ECS architecture)
-• Visual scripting system alongside C++ programming
-• Cross-platform support (Windows, Linux, macOS)
-• Built-in physics integration with custom collision system
-• Audio system with 3D spatial audio support
-• Asset pipeline with automatic optimization
-• Integrated editor with scene management and debugging tools
-
-The engine includes a comprehensive toolset for game development, from level design to asset management. It features hot-reloading capabilities, visual debugging tools, and export functionality for multiple platforms.`,
-        technologies: ["C++", "Vulkan", "Qt", "Lua", "OpenAL", "Assimp"],
-        images: [
-            "https://via.placeholder.com/800x600/533483/ffffff?text=Engine+Editor",
-            "https://via.placeholder.com/800x600/533483/64ffda?text=Scene+Management",
-            "https://via.placeholder.com/800x600/533483/ffffff?text=Visual+Scripting",
-            "https://via.placeholder.com/800x600/533483/64ffda?text=Asset+Pipeline"
-        ],
-        links: [
-            { name: "Engine Download", url: "#" },
-            { name: "Documentation", url: "#" },
-            { name: "Sample Projects", url: "#" }
-        ]
-    },
-    5: {
-        title: "GPU Ray Tracer",
-        description: `A high-performance ray tracing renderer leveraging GPU compute capabilities for photorealistic image generation. This project explores cutting-edge rendering techniques:
-
-• Monte Carlo path tracing with importance sampling
-• Bounding Volume Hierarchy (BVH) acceleration structures
-• Multiple importance sampling for efficient light transport
-• Support for complex materials (glass, metal, subsurface scattering)
-• GPU-accelerated denoising algorithms
-• Progressive rendering with adaptive sampling
-• HDR environment lighting and tone mapping
-• OpenCL compute shaders for maximum performance
-
-The ray tracer is built in Rust for memory safety and performance, utilizing OpenCL for GPU acceleration. It supports various primitive types, complex lighting scenarios, and produces high-quality renders suitable for production use.`,
-        technologies: ["Rust", "OpenCL", "GLSL", "OpenGL", "HDR", "OIDN"],
-        images: [
-            "https://via.placeholder.com/800x600/7209b7/ffffff?text=Ray+Traced+Scene",
-            "https://via.placeholder.com/800x600/7209b7/64ffda?text=Material+Showcase",
-            "https://via.placeholder.com/800x600/7209b7/ffffff?text=Lighting+Study",
-            "https://via.placeholder.com/800x600/7209b7/64ffda?text=Performance+Metrics"
-        ],
-        links: [
-            { name: "GitHub Repository", url: "#" },
-            { name: "Render Gallery", url: "#" },
-            { name: "Technical Blog", url: "#" }
-        ]
-    },
-    6: {
-        title: "VFX Processing Tool",
-        description: `An innovative visual effects processing tool that combines traditional VFX techniques with modern machine learning approaches. This tool is designed for real-time visual effects processing:
-
-• Real-time video processing pipeline with GPU acceleration
-• Machine learning models for object detection and tracking
-• Automated rotoscoping using semantic segmentation
-• Style transfer and artistic effect filters
-• Motion analysis and stabilization algorithms
-• Green screen removal with edge refinement
-• Temporal coherence for smooth video transitions
-• Integration with popular video editing software
-
-The tool utilizes Python with TensorFlow for machine learning components and OpenCV for traditional computer vision tasks. It features a user-friendly interface and supports batch processing for production workflows.`,
-        technologies: ["Python", "TensorFlow", "OpenCV", "CUDA", "NumPy", "FFmpeg"],
-        images: [
-            "https://via.placeholder.com/800x600/a663cc/ffffff?text=VFX+Pipeline",
-            "https://via.placeholder.com/800x600/a663cc/64ffda?text=ML+Object+Tracking",
-            "https://via.placeholder.com/800x600/a663cc/ffffff?text=Style+Transfer",
-            "https://via.placeholder.com/800x600/a663cc/64ffda?text=Real-time+Processing"
-        ],
-        links: [
-            { name: "Tool Download", url: "#" },
-            { name: "Tutorial Videos", url: "#" },
-            { name: "Model Repository", url: "#" }
-        ]
-    }
-};
+// Project data will be loaded dynamically from projects.json
+let projectsData = {};
 
 // DOM Elements
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
-const projectCards = document.querySelectorAll('.project-card');
+let projectCards = []; // Will be populated after loading projects
 const modal = document.getElementById('projectModal');
 const modalTitle = document.getElementById('modalTitle');
 const modalMainImage = document.getElementById('modalMainImage');
@@ -174,6 +13,91 @@ const modalDescription = document.getElementById('modalDescription');
 const modalTech = document.getElementById('modalTech');
 const modalLinks = document.getElementById('modalLinks');
 const closeModal = document.querySelector('.close');
+
+// Load projects from JSON and initialize the page
+async function loadProjects() {
+    try {
+        const response = await fetch('projects.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const projects = await response.json();
+        
+        // Convert array to object with IDs as keys for compatibility
+        projects.forEach(project => {
+            projectsData[project.id] = project;
+        });
+        
+        renderProjects(projects);
+        initializeProjectCards();
+        console.log('Projects loaded successfully!');
+    } catch (error) {
+        console.error('Error loading projects:', error);
+        // Fallback: show error message or load default projects
+        showProjectsError();
+    }
+}
+
+// Render projects to the DOM
+function renderProjects(projects) {
+    const projectsGrid = document.getElementById('projectsGrid');
+    if (!projectsGrid) {
+        console.error('Projects grid element not found');
+        return;
+    }
+    
+    projectsGrid.innerHTML = projects.map(project => `
+        <div class="project-card" data-project="${project.id}">
+            <div class="project-image">
+                <img src="${project.image}" alt="${project.title}">
+                <div class="project-overlay">
+                    <i class="fas fa-eye"></i>
+                    <span>View Details</span>
+                </div>
+            </div>
+            <div class="project-info">
+                <h3>${project.title}</h3>
+                <p>${project.subtitle}</p>
+                <div class="project-tags">
+                    ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Initialize project cards event listeners
+function initializeProjectCards() {
+    projectCards = document.querySelectorAll('.project-card');
+    projectCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const projectId = card.getAttribute('data-project');
+            openProjectModal(projectId);
+        });
+    });
+    
+    // Re-observe elements for scroll animations
+    projectCards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(card);
+    });
+}
+
+// Show error message if projects fail to load
+function showProjectsError() {
+    const projectsGrid = document.getElementById('projectsGrid');
+    if (projectsGrid) {
+        projectsGrid.innerHTML = `
+            <div class="projects-error">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>Unable to load projects</h3>
+                <p>There was an error loading the projects. Please try again later.</p>
+            </div>
+        `;
+    }
+}
 
 // Mobile Navigation Toggle
 hamburger.addEventListener('click', () => {
@@ -198,14 +122,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 block: 'start'
             });
         }
-    });
-});
-
-// Project card click handlers
-projectCards.forEach(card => {
-    card.addEventListener('click', () => {
-        const projectId = card.getAttribute('data-project');
-        openProjectModal(projectId);
     });
 });
 
@@ -588,6 +504,7 @@ class CosmicShader {
 
 // Initialize shader when page loads
 document.addEventListener('DOMContentLoaded', () => {
+    loadProjects(); // Load projects dynamically
     new CosmicShader();
     loadFragmentShaderCode();
     initAudioControl();
