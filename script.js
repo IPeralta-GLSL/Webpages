@@ -163,20 +163,21 @@ function openProjectModal(projectId) {
             img.id = 'modalMainImage';
             img.src = media.src;
             img.alt = project.title;
-            img.style.width = '100%';
-            img.style.height = 'auto';
+            img.style.maxWidth = '100%';
+            img.style.maxHeight = '100%';
             img.style.objectFit = 'contain';
+            img.style.borderRadius = '8px';
             mainImageDiv.appendChild(img);
         } else if (media.type === 'video') {
             const iframe = document.createElement('iframe');
             iframe.width = '100%';
-            iframe.height = '315';
+            iframe.height = '100%';
             iframe.src = `https://www.youtube.com/embed/${media.videoId}`;
             iframe.title = 'YouTube video player';
             iframe.frameBorder = '0';
             iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
             iframe.allowFullscreen = true;
-            iframe.style.minHeight = '315px';
+            iframe.style.borderRadius = '8px';
             mainImageDiv.appendChild(iframe);
         }
     }
@@ -194,8 +195,8 @@ function openProjectModal(projectId) {
             thumb.className = 'thumbnail-video';
             thumb.style.position = 'relative';
             thumb.style.display = 'inline-block';
-            thumb.style.width = '80px';
-            thumb.style.height = '60px';
+            thumb.style.width = '120px';
+            thumb.style.height = '90px';
             thumb.style.cursor = 'pointer';
             // Miniatura de YouTube
             const img = document.createElement('img');
@@ -204,6 +205,7 @@ function openProjectModal(projectId) {
             img.style.width = '100%';
             img.style.height = '100%';
             img.style.objectFit = 'cover';
+            img.style.borderRadius = '6px';
             thumb.appendChild(img);
             // Icono de play
             const playIcon = document.createElement('span');
@@ -212,7 +214,7 @@ function openProjectModal(projectId) {
             playIcon.style.top = '50%';
             playIcon.style.left = '50%';
             playIcon.style.transform = 'translate(-50%, -50%)';
-            playIcon.style.fontSize = '2em';
+            playIcon.style.fontSize = '2.5em';
             playIcon.style.color = 'white';
             playIcon.style.textShadow = '0 0 8px black';
             thumb.appendChild(playIcon);
