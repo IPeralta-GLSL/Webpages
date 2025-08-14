@@ -161,9 +161,9 @@ function openProjectModal(projectId) {
         </div>
     `;
     
-    // Set links
+    // Set links (open in new tab)
     modalLinks.innerHTML = project.links.map(link => 
-        `<a href="${link.url}" target="_blank">${link.name}</a>`
+        `<a href="${link.url}" target="_blank" rel="noopener noreferrer">${link.name}</a>`
     ).join('');
     
     // Show modal
