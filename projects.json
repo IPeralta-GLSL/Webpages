@@ -95,21 +95,16 @@
     },
     {
         "id": 6,
-        "title": "VFX Processing Tool",
-        "subtitle": "Real-time visual effects processing using machine learning",
-        "image": "https://via.placeholder.com/400x250/a663cc/ffffff?text=VFX+Tool",
-        "tags": ["Python", "TensorFlow", "OpenCV", "CUDA", "NumPy", "FFmpeg"],
-        "description": "An innovative visual effects processing tool that combines traditional VFX techniques with modern machine learning approaches. This tool is designed for real-time visual effects processing:\n\n• Real-time video processing pipeline with GPU acceleration\n• Machine learning models for object detection and tracking\n• Automated rotoscoping using semantic segmentation\n• Style transfer and artistic effect filters\n• Motion analysis and stabilization algorithms\n• Green screen removal with edge refinement\n• Temporal coherence for smooth video transitions\n• Integration with popular video editing software\n\nThe tool utilizes Python with TensorFlow for machine learning components and OpenCV for traditional computer vision tasks. It features a user-friendly interface and supports batch processing for production workflows.",
+        "title": "Anim Reflect Plugin",
+        "subtitle": "Little Tool for mirrored animations in Unreal Engine",
+        "image": "Portfolio/MirrorAnimationSystem_Screenshot_01-1920x1080-0e6f9269694712dae2a103f971a862b0.avif",
+        "tags": ["c++", "Unreal Engine"],
+        "description": "AnimReflect (formerly known as MirrorAnimationSystem) is a plugin for Unreal Engine that allows for dynamic animation reversal. This plugin is based on the original MirrorAnimationSystem project created by Rexocrates. AnimReflect incorporates functionalities that enable mirroring animations with their root motion at runtime, both within the editor and during gameplay.",
         "images": [
-            "https://via.placeholder.com/800x600/a663cc/ffffff?text=VFX+Pipeline",
-            "https://via.placeholder.com/800x600/a663cc/64ffda?text=ML+Object+Tracking",
-            "https://via.placeholder.com/800x600/a663cc/ffffff?text=Style+Transfer",
-            "https://via.placeholder.com/800x600/a663cc/64ffda?text=Real-time+Processing"
+            "Portfolio/MirrorAnimationSystem_Screenshot_01-1920x1080-0e6f9269694712dae2a103f971a862b0.avif"
         ],
         "links": [
-            { "name": "Tool Download", "url": "#" },
-            { "name": "Tutorial Videos", "url": "#" },
-            { "name": "Model Repository", "url": "#" }
+            { "name": "GitHub Repository", "url": "https://github.com/Nachoidev2/Anim_Reflect" }
         ]
     }
 ]
