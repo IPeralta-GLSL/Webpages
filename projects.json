@@ -1,54 +1,50 @@
 [
     {
         "id": 1,
-        "title": "Custom 3D Renderer",
+        "title": "Darkmoon Engine",
         "subtitle": "Real-time 3D renderer built from scratch using OpenGL and C++",
-        "image": "https://via.placeholder.com/400x250/1a1a2e/ffffff?text=3D+Renderer",
-        "tags": ["C++", "OpenGL", "GLSL", "OpenGL 4.6", "Assimp", "GLM", "GLFW"],
-        "description": "A high-performance 3D rendering engine built from scratch using modern OpenGL and C++. This project demonstrates advanced graphics programming techniques including:\n\n• Physically Based Rendering (PBR) pipeline\n• Real-time shadows with cascade shadow mapping\n• Deferred rendering for optimal performance\n• Post-processing effects (SSAO, Bloom, Tone mapping)\n• Model loading with Assimp integration\n• Custom shader management system\n• Frustum culling and occlusion culling optimization\n\nThe renderer supports various lighting models, material systems, and provides a flexible architecture for creating complex 3D scenes. Performance optimizations include instanced rendering, GPU-driven rendering, and efficient memory management.",
+        "image": "Portfolio/DarkmoonEngine/Screenshot_20250730_002656.png",
+        "tags": ["Rust", "Vulkan", "RayTracing"],
+        "description": "A high-performance 3D rendering engine built from scratch using modern Vulkan and Rust. This project demonstrates advanced graphics programming techniques including:\n\n• Physically Based Rendering (PBR) pipeline\n• Real-time shadows with cascade shadow mapping\n• Deferred rendering for optimal performance\n• Post-processing effects (SSAO, Bloom, Tone mapping)\n• Model loading with Assimp integration\n• Custom shader management system\n• Frustum culling and occlusion culling optimization\n\nThe renderer supports various lighting models, material systems, and provides a flexible architecture for creating complex 3D scenes. Performance optimizations include instanced rendering, GPU-driven rendering, and efficient memory management.",
         "images": [
-            "https://via.placeholder.com/800x600/1a1a2e/ffffff?text=PBR+Rendering",
-            "https://via.placeholder.com/800x600/1a1a2e/64ffda?text=Shadow+Mapping",
-            "https://via.placeholder.com/800x600/1a1a2e/ffffff?text=Post+Processing",
-            "https://via.placeholder.com/800x600/1a1a2e/64ffda?text=Material+System"
+            "Portfolio/DarkmoonEngine/Screenshot_20250730_002656.png",
+            "Portfolio/DarkmoonEngine/Screenshot_20250730_002918.png",
+            "Portfolio/DarkmoonEngine/Screenshot_20250724_021008-1.png",
+            "Portfolio/DarkmoonEngine/Screenshot_20250730_002656.png"
         ],
         "links": [
             { "name": "GitHub Repository", "url": "#" },
-            { "name": "Live Demo", "url": "#" },
             { "name": "Documentation", "url": "#" }
         ]
     },
     {
         "id": 2,
-        "title": "Physics Engine",
-        "subtitle": "Custom physics simulation engine with collision detection",
-        "image": "https://via.placeholder.com/400x250/16213e/ffffff?text=Physics+Engine",
-        "tags": ["C++", "Physics", "CUDA", "OpenMP", "Eigen", "ImGui"],
-        "description": "A comprehensive physics simulation engine designed for real-time applications. The engine implements advanced collision detection algorithms and supports various types of rigid body dynamics:\n\n• Broad-phase collision detection using spatial partitioning\n• Narrow-phase collision with SAT and GJK algorithms\n• Constraint-based physics solver with iterative methods\n• CUDA acceleration for massive particle simulations\n• Fluid dynamics simulation with SPH (Smoothed Particle Hydrodynamics)\n• Soft body physics with mass-spring systems\n• Integration with graphics pipeline for visualization\n\nThe engine is optimized for performance with multi-threading support and GPU acceleration where applicable. It includes debugging tools and visualization features to help developers understand and tune physics behaviors.",
+        "title": "Rust Engine",
+        "subtitle": "My first real time game engine built in Rust",
+        "image": "Portfolio/RustEngine/Screenshot_20250710_005101-1.png",
+        "tags": ["Rust", "BulletPhysics", "Vulkan", "DirectX 12", "Metal"],
+        "description": "My first real time game engine built in Rust, focuses on real-time and physics simulation with Bullet Physics. This engine is designed to handle multiplataform with vulkan,Dx12 and metal api backends",
         "images": [
-            "https://via.placeholder.com/800x600/16213e/ffffff?text=Collision+Detection",
-            "https://via.placeholder.com/800x600/16213e/64ffda?text=Rigid+Body+Dynamics",
-            "https://via.placeholder.com/800x600/16213e/ffffff?text=Fluid+Simulation",
-            "https://via.placeholder.com/800x600/16213e/64ffda?text=Soft+Body+Physics"
+            "Portfolio/RustEngine/Screenshot_20250710_005101-1.png",
+            "Portfolio/RustEngine/Screenshot_20250709_220557.png",
+            "Portfolio/RustEngine/Screenshot_20250713_201750-1.png",
+            "Portfolio/RustEngine/Screenshot_20250715_233926.png"
         ],
         "links": [
-            { "name": "GitHub Repository", "url": "#" },
-            { "name": "Technical Paper", "url": "#" },
-            { "name": "Performance Benchmarks", "url": "#" }
+            { "name": "GitHub Repository", "url": "#" }
         ]
     },
     {
         "id": 3,
-        "title": "Real-time Shader Editor",
-        "subtitle": "Live shader editing tool with real-time preview",
-        "image": "https://via.placeholder.com/400x250/0f3460/ffffff?text=Shader+Editor",
-        "tags": ["C#", "DirectX", "HLSL", "DirectX 11", "WPF", ".NET", "SharpDX"],
+        "title": "Offline render engine",
+        "subtitle": "My first offline render engine using Python and Nvidia Cuda",
+        "image": "Portfolio/PythonEngine/Screenshot_20240917_133850.png",
+        "tags": ["Python", "OpenGL", "OpenCL", "Cuda", "Ray Tracing"],
         "description": "An advanced shader development environment that provides real-time editing and preview capabilities. This tool is designed to streamline the shader development workflow:\n\n• Live shader compilation and error reporting\n• Node-based visual shader editor\n• Real-time preview with customizable 3D scenes\n• Hot-reload functionality for rapid iteration\n• Support for multiple shading languages (HLSL, GLSL)\n• Built-in library of common shader patterns\n• Performance profiling and optimization suggestions\n• Export functionality for various game engines\n\nThe editor features a modern interface built with C# and WPF, utilizing DirectX for rendering. It includes debugging tools, visual node graphs for complex shader logic, and integration with popular game engines.",
         "images": [
-            "https://via.placeholder.com/800x600/0f3460/ffffff?text=Shader+Editor+UI",
-            "https://via.placeholder.com/800x600/0f3460/64ffda?text=Node+Graph+System",
-            "https://via.placeholder.com/800x600/0f3460/ffffff?text=Real-time+Preview",
-            "https://via.placeholder.com/800x600/0f3460/64ffda?text=Performance+Tools"
+            "Portfolio/PythonEngine/Screenshot_20240917_133850.png",
+            "Portfolio/PythonEngine/Screenshot_20240917_133839.png",
+            "Portfolio/PythonEngine/Screenshot_20240919_160119.png"
         ],
         "links": [
             { "name": "Download Tool", "url": "#" },
