@@ -753,3 +753,85 @@ function highlightGLSL(line) {
 
     return highlighted;
 }
+
+// Contact Form Handling
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('contactForm');
+    const formMessage = document.getElementById('form-message');
+    const submitBtn = contactForm.querySelector('.submit-btn');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            
+            // Hide previous messages
+            formMessage.style.display = 'none';
+            formMessage.className = 'form-message';
+            
+            try {
+                // Get form data
+                const formData = new FormData(contactForm);
+                
+                // Send form data to PHP script
+                const response = await fetch('send_email.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Show success message
+                    formMessage.className = 'form-message success';
+                    formMessage.textContent = result.message;
+                    formMessage.style.display = 'block';
+                    
+                    // Reset form
+                    contactForm.reset();
+                    
+                    // Scroll to message
+                    formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                } else {
+                    // Show error message
+                    formMessage.className = 'form-message error';
+                    formMessage.textContent = result.message;
+                    formMessage.style.display = 'block';
+                }
+                
+            } catch (error) {
+                console.error('Error sending form:', error);
+                formMessage.className = 'form-message error';
+                formMessage.textContent = 'Sorry, there was an error sending your message. Please try again or contact me directly.';
+                formMessage.style.display = 'block';
+            } finally {
+                // Reset button state
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        });
+        
+        // Add input validation styling
+        const inputs = contactForm.querySelectorAll('input, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.validity.valid) {
+                    this.style.borderColor = 'rgba(76, 175, 80, 0.5)';
+                } else if (this.value.length > 0) {
+                    this.style.borderColor = 'rgba(244, 67, 54, 0.5)';
+                } else {
+                    this.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                }
+            });
+            
+            input.addEventListener('focus', function() {
+                this.style.borderColor = '#4CAF50';
+            });
+        });
+    }
+});
