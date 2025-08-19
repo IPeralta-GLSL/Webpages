@@ -2,7 +2,7 @@
     {
         "id": 1,
         "title": "Darkmoon Engine",
-        "subtitle": "Real-time 3D renderer built from scratch using OpenGL and C++",
+        "subtitle": "Game engine based real time rasterization and ray tracing with RT core hardware acceleration",
         "image": "Portfolio/DarkmoonEngine/Screenshot_20250730_002656.png",
         "tags": ["Rust", "Vulkan", "RayTracing"],
         "description": "A high-performance 3D rendering engine built from scratch using modern Vulkan and Rust. This project demonstrates advanced graphics programming techniques including:\n\n• Physically Based Rendering (PBR) pipeline\n• Real-time shadows with cascade shadow mapping\n• Deferred rendering for optimal performance\n• Post-processing effects (SSAO, Bloom, Tone mapping)\n• Model loading with Assimp integration\n• Custom shader management system\n• Frustum culling and occlusion culling optimization\n\nThe renderer supports various lighting models, material systems, and provides a flexible architecture for creating complex 3D scenes. Performance optimizations include instanced rendering, GPU-driven rendering, and efficient memory management.",
@@ -83,9 +83,7 @@
             "Portfolio/zamba/Zamba.webp"
         ],
         "links": [
-            { "name": "Pakapaka Official", "url": "#" },
-            { "name": "Educational Content", "url": "#" },
-            { "name": "Behind the Scenes", "url": "#" }
+            { "name": "Pakapaka Official", "url": "https://www.pakapaka.gob.ar/" }
         ],
         "video": "https://youtu.be/ekyM1b6SCuY"
     },
