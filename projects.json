@@ -100,5 +100,19 @@
         "links": [
             { "name": "GitHub Repository", "url": "https://github.com/Nachoidev2/Anim_Reflect" }
         ]
+    },
+    {
+        "id": 7,
+        "title": "Juani & Nacho Website",
+        "subtitle": "Official website dynamic for the Juani & Nacho project",
+        "image": "Portfolio/Juani&Nacho/brave_screenshot_juaniandnacho.com.png",
+        "tags": ["HTML", "CSS", "JavaScript", "Php"],
+        "description": "The official website for the Juani & Nacho project, showcasing the characters and their adventures. This website serves as a hub for fans to explore content related to the project, including animations, games, and educational resources.",
+        "images": [
+            "Portfolio/Juani&Nacho/brave_screenshot_juaniandnacho.com.png"
+        ],
+        "links": [
+            { "name": "Website", "url": "https://juaniandnacho.com/" }
+        ]
     }
 ]
