@@ -84,19 +84,12 @@ function renderExperience(experience) {
                 <div class="timeline-date">${exp.duration}</div>
                 <div class="experience-card" id="exp-card-${index}">
                     <div class="experience-header">
-                        <h3 class="job-title">${exp.position}</h3>
-                        <h4 class="company">${exp.company}</h4>
-                        <div class="location">${exp.location}</div>
+                        <h3 class="company-position">${exp.company} - ${exp.position}</h3>
+                        <div class="date-location">${exp.duration} • ${exp.location}</div>
                     </div>
                     <div class="experience-description">
                         <p>${exp.description}</p>
                     </div>
-                    ${exp.technologies && exp.technologies.length > 0 ? `
-                        <div class="experience-tech">
-                            ${exp.technologies.slice(0, 4).map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
-                            ${exp.technologies.length > 4 ? `<span class="tech-tag" style="opacity: 0.6;">+${exp.technologies.length - 4}</span>` : ''}
-                        </div>
-                    ` : ''}
                     ${exp.achievements && exp.achievements.length > 0 ? `
                         <div class="achievements-hidden" style="display: none;">
                             <ul class="achievements">
@@ -158,19 +151,12 @@ function renderAllExperience(experience) {
                 <div class="timeline-date">${exp.duration}</div>
                 <div class="experience-card" id="exp-card-${index}">
                     <div class="experience-header">
-                        <h3 class="job-title">${exp.position}</h3>
-                        <h4 class="company">${exp.company}</h4>
-                        <div class="location">${exp.location}</div>
+                        <h3 class="company-position">${exp.company} - ${exp.position}</h3>
+                        <div class="date-location">${exp.duration} • ${exp.location}</div>
                     </div>
                     <div class="experience-description">
                         <p>${exp.description}</p>
                     </div>
-                    ${exp.technologies && exp.technologies.length > 0 ? `
-                        <div class="experience-tech">
-                            ${exp.technologies.slice(0, 4).map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
-                            ${exp.technologies.length > 4 ? `<span class="tech-tag" style="opacity: 0.6;">+${exp.technologies.length - 4}</span>` : ''}
-                        </div>
-                    ` : ''}
                     ${exp.achievements && exp.achievements.length > 0 ? `
                         <div class="achievements-hidden" style="display: none;">
                             <ul class="achievements">
@@ -201,7 +187,6 @@ function toggleExperience(index) {
     const card = document.getElementById(`exp-card-${index}`);
     const btn = card.querySelector('.expand-btn');
     const achievementsContainer = card.querySelector('.achievements-hidden');
-    const techDiv = card.querySelector('.experience-tech');
     
     if (card.classList.contains('expanded')) {
         // Collapse
@@ -212,17 +197,6 @@ function toggleExperience(index) {
         if (achievementsContainer) {
             achievementsContainer.style.display = 'none';
         }
-        
-        // Restore limited tech tags
-        if (techDiv) {
-            const experience = window.experienceData[index];
-            if (experience.technologies && experience.technologies.length > 4) {
-                techDiv.innerHTML = `
-                    ${experience.technologies.slice(0, 4).map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
-                    <span class="tech-tag" style="opacity: 0.6;">+${experience.technologies.length - 4}</span>
-                `;
-            }
-        }
     } else {
         // Expand
         card.classList.add('expanded');
@@ -231,14 +205,6 @@ function toggleExperience(index) {
         // Show achievements
         if (achievementsContainer) {
             achievementsContainer.style.display = 'block';
-        }
-        
-        // Show all tech tags
-        if (techDiv) {
-            const experience = window.experienceData[index];
-            if (experience.technologies) {
-                techDiv.innerHTML = experience.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('');
-            }
         }
     }
 }
