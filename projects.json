@@ -117,16 +117,17 @@
     },
     {
         "id": 8,
-        "title": "Juani & Nacho Website",
-        "subtitle": "Official website dynamic for the Juani & Nacho project",
-        "image": "Portfolio/Juani&Nacho/brave_screenshot_juaniandnacho.com.png",
-        "tags": ["HTML", "CSS", "JavaScript", "Php"],
-        "description": "The official website for the Juani & Nacho project, showcasing the characters and their adventures. This website serves as a hub for fans to explore content related to the project, including animations, games, and educational resources.",
+        "title": "DOKM",
+        "subtitle": "Game Multiplayer",
+        "image": "Portfolio/DOKM/Copilot_20250818_231203.png",
+        "tags": ["Unreal Engine", "C++"],
+        "description": "The official website for the DOKM project, showcasing the characters and their adventures. This website serves as a hub for fans to explore content related to the project, including animations, games, and educational resources.",
         "images": [
-            "Portfolio/Juani&Nacho/brave_screenshot_juaniandnacho.com.png"
+            "Portfolio/DOKM/Copilot_20250818_231203.png",
+            "Portfolio/DOKM/DOKM.jpg"
         ],
         "links": [
-            { "name": "Website", "url": "https://juaniandnacho.com/" }
+            { "name": "Website", "url": "https://dokm.com/" }
         ]
     }
 ]
