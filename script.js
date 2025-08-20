@@ -55,6 +55,7 @@ async function loadExperience() {
         }
         
         experienceData = experience;
+        window.experienceData = experience; // Store globally for expand/collapse functionality
         renderExperience(experience);
         console.log('Experience loaded successfully from experience.json');
         
@@ -64,7 +65,7 @@ async function loadExperience() {
     }
 }
 
-// Render experience to the DOM
+// Render experience to the DOM with compact design
 function renderExperience(experience) {
     const experienceTimeline = document.getElementById('experienceTimeline');
     if (!experienceTimeline) {
@@ -72,12 +73,16 @@ function renderExperience(experience) {
         return;
     }
     
-    experienceTimeline.innerHTML = experience.map(exp => `
+    // Initially show only first 5 experiences
+    const initialShowCount = 5;
+    const shouldShowExpandBtn = experience.length > initialShowCount;
+    
+    experienceTimeline.innerHTML = experience.slice(0, initialShowCount).map((exp, index) => `
         <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
                 <div class="timeline-date">${exp.duration}</div>
-                <div class="experience-card">
+                <div class="experience-card" id="exp-card-${index}">
                     <div class="experience-header">
                         <h3 class="job-title">${exp.position}</h3>
                         <h4 class="company">${exp.company}</h4>
@@ -85,17 +90,97 @@ function renderExperience(experience) {
                     </div>
                     <div class="experience-description">
                         <p>${exp.description}</p>
-                        ${exp.achievements && exp.achievements.length > 0 ? `
-                            <ul class="achievements">
-                                ${exp.achievements.map(achievement => `<li>${achievement}</li>`).join('')}
-                            </ul>
-                        ` : ''}
                     </div>
                     ${exp.technologies && exp.technologies.length > 0 ? `
                         <div class="experience-tech">
-                            ${exp.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                            ${exp.technologies.slice(0, 4).map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                            ${exp.technologies.length > 4 ? `<span class="tech-tag" style="opacity: 0.6;">+${exp.technologies.length - 4}</span>` : ''}
                         </div>
                     ` : ''}
+                    ${exp.achievements && exp.achievements.length > 0 ? `
+                        <div class="achievements-hidden" style="display: none;">
+                            <ul class="achievements">
+                                ${exp.achievements.map(achievement => `<li>${achievement}</li>`).join('')}
+                            </ul>
+                        </div>
+                    ` : ''}
+                    <button class="expand-btn" onclick="toggleExperience(${index})">
+                        Show more <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+    
+    // Add "Show More Experiences" button if there are more than 5
+    if (shouldShowExpandBtn) {
+        experienceTimeline.innerHTML += `
+            <div class="timeline-item show-more-container">
+                <div class="timeline-dot" style="background: rgba(76, 175, 80, 0.5);"></div>
+                <div class="timeline-content" style="text-align: center;">
+                    <button class="show-more-experiences-btn" onclick="showAllExperiences()">
+                        Show ${experience.length - initialShowCount} More Experiences <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+    
+    // Re-observe timeline items for scroll animations
+    const timelineItems = experienceTimeline.querySelectorAll('.timeline-item');
+    timelineItems.forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(30px)';
+        item.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+        observer.observe(item);
+    });
+}
+
+// Show all experiences when "Show More" is clicked
+function showAllExperiences() {
+    if (window.experienceData) {
+        renderAllExperience(window.experienceData);
+    }
+}
+
+// Render all experiences without limits
+function renderAllExperience(experience) {
+    const experienceTimeline = document.getElementById('experienceTimeline');
+    if (!experienceTimeline) {
+        console.error('Experience timeline element not found');
+        return;
+    }
+    
+    experienceTimeline.innerHTML = experience.map((exp, index) => `
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="timeline-date">${exp.duration}</div>
+                <div class="experience-card" id="exp-card-${index}">
+                    <div class="experience-header">
+                        <h3 class="job-title">${exp.position}</h3>
+                        <h4 class="company">${exp.company}</h4>
+                        <div class="location">${exp.location}</div>
+                    </div>
+                    <div class="experience-description">
+                        <p>${exp.description}</p>
+                    </div>
+                    ${exp.technologies && exp.technologies.length > 0 ? `
+                        <div class="experience-tech">
+                            ${exp.technologies.slice(0, 4).map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                            ${exp.technologies.length > 4 ? `<span class="tech-tag" style="opacity: 0.6;">+${exp.technologies.length - 4}</span>` : ''}
+                        </div>
+                    ` : ''}
+                    ${exp.achievements && exp.achievements.length > 0 ? `
+                        <div class="achievements-hidden" style="display: none;">
+                            <ul class="achievements">
+                                ${exp.achievements.map(achievement => `<li>${achievement}</li>`).join('')}
+                            </ul>
+                        </div>
+                    ` : ''}
+                    <button class="expand-btn" onclick="toggleExperience(${index})">
+                        Show more <i class="fas fa-chevron-down"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -106,9 +191,56 @@ function renderExperience(experience) {
     timelineItems.forEach((item, index) => {
         item.style.opacity = '0';
         item.style.transform = 'translateY(30px)';
-        item.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+        item.style.transition = `opacity 0.6s ease ${index * 0.05}s, transform 0.6s ease ${index * 0.05}s`;
         observer.observe(item);
     });
+}
+
+// Toggle experience card expansion
+function toggleExperience(index) {
+    const card = document.getElementById(`exp-card-${index}`);
+    const btn = card.querySelector('.expand-btn');
+    const achievementsContainer = card.querySelector('.achievements-hidden');
+    const techDiv = card.querySelector('.experience-tech');
+    
+    if (card.classList.contains('expanded')) {
+        // Collapse
+        card.classList.remove('expanded');
+        btn.innerHTML = 'Show more <i class="fas fa-chevron-down"></i>';
+        
+        // Hide achievements
+        if (achievementsContainer) {
+            achievementsContainer.style.display = 'none';
+        }
+        
+        // Restore limited tech tags
+        if (techDiv) {
+            const experience = window.experienceData[index];
+            if (experience.technologies && experience.technologies.length > 4) {
+                techDiv.innerHTML = `
+                    ${experience.technologies.slice(0, 4).map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                    <span class="tech-tag" style="opacity: 0.6;">+${experience.technologies.length - 4}</span>
+                `;
+            }
+        }
+    } else {
+        // Expand
+        card.classList.add('expanded');
+        btn.innerHTML = 'Show less <i class="fas fa-chevron-up"></i>';
+        
+        // Show achievements
+        if (achievementsContainer) {
+            achievementsContainer.style.display = 'block';
+        }
+        
+        // Show all tech tags
+        if (techDiv) {
+            const experience = window.experienceData[index];
+            if (experience.technologies) {
+                techDiv.innerHTML = experience.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('');
+            }
+        }
+    }
 }
 
 // Show error message if experience fails to load
