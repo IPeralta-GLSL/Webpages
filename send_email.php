@@ -5,7 +5,7 @@ header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
 // Configuración del correo
-$to_email = "peraltaignacio@protonmail.com.ar"; // Tu email de destino
+$to_email = "peraltaignacio@protonmail.com"; // Tu email de destino
 $website_name = "Ignacio Peralta Portfolio";
 
 // Verificar que sea una petición POST
