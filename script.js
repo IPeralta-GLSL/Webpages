@@ -1,5 +1,6 @@
 // Project data will be loaded dynamically from projects.json
 let projectsData = {};
+let experienceData = {};
 
 // DOM Elements
 const hamburger = document.querySelector('.hamburger');
@@ -35,6 +36,108 @@ async function loadProjects() {
         console.error('Error loading projects:', error);
         // Fallback: show error message or load default projects
         showProjectsError();
+    }
+}
+
+// Load experience from LinkedIn API or JSON file
+async function loadExperience() {
+    try {
+        // Try to get dynamic LinkedIn data first
+        let response = await fetch('get_linkedin_experience.php?method=file&profile=https://www.linkedin.com/in/ignacio-peralta-768396174/');
+        
+        if (!response.ok) {
+            // Fallback to direct JSON file
+            response = await fetch('experience.json');
+        }
+        
+        const result = await response.json();
+        
+        // Handle different response formats
+        let experience = [];
+        if (result.success && result.data) {
+            experience = result.data;
+        } else if (Array.isArray(result)) {
+            experience = result;
+        } else {
+            throw new Error('Invalid experience data format');
+        }
+        
+        experienceData = experience;
+        renderExperience(experience);
+        console.log('Experience loaded successfully!', result.source || 'direct');
+        
+        // Show source info in console for debugging
+        if (result.source) {
+            console.log(`Experience source: ${result.source}`);
+            if (result.last_updated) {
+                console.log(`Last updated: ${new Date(result.last_updated * 1000)}`);
+            }
+        }
+        
+    } catch (error) {
+        console.error('Error loading experience:', error);
+        showExperienceError();
+    }
+}
+
+// Render experience to the DOM
+function renderExperience(experience) {
+    const experienceTimeline = document.getElementById('experienceTimeline');
+    if (!experienceTimeline) {
+        console.error('Experience timeline element not found');
+        return;
+    }
+    
+    experienceTimeline.innerHTML = experience.map(exp => `
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="timeline-date">${exp.duration}</div>
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <h3 class="job-title">${exp.position}</h3>
+                        <h4 class="company">${exp.company}</h4>
+                        <div class="location">${exp.location}</div>
+                    </div>
+                    <div class="experience-description">
+                        <p>${exp.description}</p>
+                        ${exp.achievements && exp.achievements.length > 0 ? `
+                            <ul class="achievements">
+                                ${exp.achievements.map(achievement => `<li>${achievement}</li>`).join('')}
+                            </ul>
+                        ` : ''}
+                    </div>
+                    ${exp.technologies && exp.technologies.length > 0 ? `
+                        <div class="experience-tech">
+                            ${exp.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                        </div>
+                    ` : ''}
+                </div>
+            </div>
+        </div>
+    `).join('');
+    
+    // Re-observe timeline items for scroll animations
+    const timelineItems = experienceTimeline.querySelectorAll('.timeline-item');
+    timelineItems.forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(30px)';
+        item.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+        observer.observe(item);
+    });
+}
+
+// Show error message if experience fails to load
+function showExperienceError() {
+    const experienceTimeline = document.getElementById('experienceTimeline');
+    if (experienceTimeline) {
+        experienceTimeline.innerHTML = `
+            <div class="experience-error">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>Unable to load experience</h3>
+                <p>There was an error loading the professional experience. Please try again later.</p>
+            </div>
+        `;
     }
 }
 
@@ -588,6 +691,7 @@ class CosmicShader {
 // Initialize shader when page loads
 document.addEventListener('DOMContentLoaded', () => {
     loadProjects(); // Load projects dynamically
+    loadExperience(); // Load experience dynamically
     new CosmicShader();
     loadFragmentShaderCode();
     initAudioControl();

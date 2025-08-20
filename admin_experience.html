@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Experience Data - Ignacio Peralta</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(76, 175, 80, 0.2);
+        }
+        
+        h1 {
+            color: #4CAF50;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .section h2 {
+            color: #4CAF50;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #cccccc;
+            font-weight: 500;
+        }
+        
+        input[type="file"],
+        input[type="password"],
+        textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            color: #ffffff;
+            font-size: 1rem;
+        }
+        
+        input[type="file"]:focus,
+        input[type="password"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+        }
+        
+        textarea {
+            min-height: 200px;
+            font-family: 'Courier New', monospace;
+            resize: vertical;
+        }
+        
+        .btn {
+            background: #4CAF50;
+            color: #0a0a0a;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 1rem;
+        }
+        
+        .btn:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+        
+        .btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .message {
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+        
+        .message.success {
+            background: rgba(76, 175, 80, 0.1);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            color: #4CAF50;
+        }
+        
+        .message.error {
+            background: rgba(244, 67, 54, 0.1);
+            border: 1px solid rgba(244, 67, 54, 0.3);
+            color: #f44336;
+        }
+        
+        .instructions {
+            background: rgba(76, 175, 80, 0.05);
+            padding: 1rem;
+            border-radius: 6px;
+            border-left: 4px solid #4CAF50;
+            margin-bottom: 1rem;
+        }
+        
+        .instructions h3 {
+            color: #4CAF50;
+            margin-bottom: 0.5rem;
+        }
+        
+        .instructions ol {
+            margin-left: 1.5rem;
+        }
+        
+        .instructions li {
+            margin-bottom: 0.5rem;
+            color: #cccccc;
+        }
+        
+        .back-link {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(76, 175, 80, 0.3);
+            border-top: 2px solid #4CAF50;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 0.5rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            .back-link {
+                position: relative;
+                top: auto;
+                left: auto;
+                display: block;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-link">← Back to Portfolio</a>
+    
+    <div class="container">
+        <h1>Update Experience Data</h1>
+        
+        <div id="message" class="message"></div>
+        
+        <div class="section">
+            <div class="instructions">
+                <h3>How to export your LinkedIn data:</h3>
+                <ol>
+                    <li>Go to <strong>LinkedIn → Settings & Privacy → Data Privacy → Get a copy of your data</strong></li>
+                    <li>Select <strong>"Want something in particular? Select the data files you want"</strong></li>
+                    <li>Check <strong>"Positions"</strong> or <strong>"Profile"</strong></li>
+                    <li>Click <strong>"Request archive"</strong></li>
+                    <li>LinkedIn will email you a download link (usually within 10 minutes)</li>
+                    <li>Extract the ZIP and upload the <strong>"Positions.csv"</strong> or the JSON files</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Method 1: Upload LinkedIn Export File</h2>
+            <form id="fileUploadForm">
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="linkedinFile">LinkedIn Export File (JSON or CSV):</label>
+                    <input type="file" id="linkedinFile" name="linkedin_export" accept=".json,.csv" required>
+                </div>
+                
+                <button type="submit" class="btn">Upload & Update</button>
+                <button type="button" class="btn btn-secondary" onclick="loadCurrentData()">Load Current Data</button>
+            </form>
+        </div>
+        
+        <div class="section">
+            <h2>Method 2: Paste JSON Data Directly</h2>
+            <form id="jsonUploadForm">
+                <div class="form-group">
+                    <label for="passwordJson">Password:</label>
+                    <input type="password" id="passwordJson" name="password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="experienceData">Experience Data (JSON format):</label>
+                    <textarea id="experienceData" name="experience_data" placeholder='Paste your JSON data here or click "Load Current Data" to see the current format'></textarea>
+                </div>
+                
+                <button type="submit" class="btn">Update from JSON</button>
+                <button type="button" class="btn btn-secondary" onclick="validateJson()">Validate JSON</button>
+            </form>
+        </div>
+        
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            Processing...
+        </div>
+    </div>
+
+    <script>
+        function showMessage(message, type) {
+            const messageEl = document.getElementById('message');
+            messageEl.textContent = message;
+            messageEl.className = `message ${type}`;
+            messageEl.style.display = 'block';
+            
+            setTimeout(() => {
+                messageEl.style.display = 'none';
+            }, 5000);
+        }
+        
+        function showLoading(show) {
+            document.getElementById('loading').style.display = show ? 'block' : 'none';
+        }
+        
+        async function loadCurrentData() {
+            try {
+                showLoading(true);
+                const response = await fetch('experience.json');
+                const data = await response.json();
+                document.getElementById('experienceData').value = JSON.stringify(data, null, 2);
+                showMessage('Current data loaded successfully!', 'success');
+            } catch (error) {
+                showMessage('Error loading current data: ' + error.message, 'error');
+            } finally {
+                showLoading(false);
+            }
+        }
+        
+        function validateJson() {
+            const jsonData = document.getElementById('experienceData').value;
+            try {
+                JSON.parse(jsonData);
+                showMessage('JSON is valid!', 'success');
+            } catch (error) {
+                showMessage('Invalid JSON: ' + error.message, 'error');
+            }
+        }
+        
+        document.getElementById('fileUploadForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            try {
+                showLoading(true);
+                const response = await fetch('update_experience.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showMessage(`Success! Updated ${result.items_updated} items. ${result.backup_created ? 'Backup created: ' + result.backup_created : ''}`, 'success');
+                    this.reset();
+                } else {
+                    showMessage('Error: ' + result.error, 'error');
+                }
+            } catch (error) {
+                showMessage('Error uploading file: ' + error.message, 'error');
+            } finally {
+                showLoading(false);
+            }
+        });
+        
+        document.getElementById('jsonUploadForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            try {
+                showLoading(true);
+                const response = await fetch('update_experience.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showMessage(`Success! Updated ${result.items_updated} items. ${result.backup_created ? 'Backup created: ' + result.backup_created : ''}`, 'success');
+                } else {
+                    showMessage('Error: ' + result.error, 'error');
+                }
+            } catch (error) {
+                showMessage('Error updating data: ' + error.message, 'error');
+            } finally {
+                showLoading(false);
+            }
+        });
+        
+        // Auto-load current data on page load
+        window.addEventListener('load', loadCurrentData);
+    </script>
+</body>
+</html>
