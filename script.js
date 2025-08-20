@@ -39,40 +39,24 @@ async function loadProjects() {
     }
 }
 
-// Load experience from LinkedIn API or JSON file
+// Load experience from JSON file
 async function loadExperience() {
     try {
-        // Try to get dynamic LinkedIn data first
-        let response = await fetch('get_linkedin_experience.php?method=file&profile=https://www.linkedin.com/in/ignacio-peralta-768396174/');
+        const response = await fetch('experience.json');
         
         if (!response.ok) {
-            // Fallback to direct JSON file
-            response = await fetch('experience.json');
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
         
-        const result = await response.json();
+        const experience = await response.json();
         
-        // Handle different response formats
-        let experience = [];
-        if (result.success && result.data) {
-            experience = result.data;
-        } else if (Array.isArray(result)) {
-            experience = result;
-        } else {
+        if (!Array.isArray(experience)) {
             throw new Error('Invalid experience data format');
         }
         
         experienceData = experience;
         renderExperience(experience);
-        console.log('Experience loaded successfully!', result.source || 'direct');
-        
-        // Show source info in console for debugging
-        if (result.source) {
-            console.log(`Experience source: ${result.source}`);
-            if (result.last_updated) {
-                console.log(`Last updated: ${new Date(result.last_updated * 1000)}`);
-            }
-        }
+        console.log('Experience loaded successfully from experience.json');
         
     } catch (error) {
         console.error('Error loading experience:', error);
