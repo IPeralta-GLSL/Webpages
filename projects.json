@@ -163,11 +163,11 @@
         "id": 10,
         "title": "BiciCole",
         "subtitle": "Game Multiplayer",
-        "image": "Portfolio/BiciCole/bicicole.png",
+        "image": "Portfolio/Bicicole/bicicole.png",
         "tags": ["Unreal Engine", "C++"],
         "description": "The official website for the DOKM project, showcasing the characters and their adventures. This website serves as a hub for fans to explore content related to the project, including animations, games, and educational resources.",
         "images": [
-            "Portfolio/BiciCole/bicicole.png"
+            "Portfolio/Bicicole/bicicole.png"
         ],
         "links": [
             { "name": "Website", "url": "https://bicicole.com/" }
