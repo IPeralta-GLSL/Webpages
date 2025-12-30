@@ -87,6 +87,21 @@
         ],
         "video": "https://youtu.be/ekyM1b6SCuY"
     },
+        {
+        "id": 5,
+        "title": "Zamba y Nina Videojuego",
+        "subtitle": "Educational interactive series for children",
+        "image": "Portfolio/zamba/ZambaGame.jpg",
+        "tags": ["Unreal Engine", "Animation", "Educational Design"],
+        "description": "An educational interactive experience developed for Pakapaka (Public Television Argentina) featuring the beloved characters Zamba and Nina. This project combines entertainment with education to teach children about Argentine geography and culture:\n\n• Interactive storytelling with educational content\n• Real-time 3D environments representing Argentine regions\n• Character animation and voice acting integration\n• Mini-games and interactive elements\n• Educational content about Argentine history and geography\n• Child-friendly user interface design\n• Accessibility features for diverse audiences\n• Integration with broadcast television content\n\nThe project was developed using Unreal Engine to create immersive, educational experiences that engage children while teaching them about their country's rich cultural heritage.",
+        "images": [
+            "Portfolio/zamba/ZambaGame.jpg"
+        ],
+        "links": [
+            { "name": "Pakapaka Official", "url": "https://www.pakapaka.gob.ar/" }
+        ],
+        "video": "https://youtu.be/ekyM1b6SCuY"
+    },
     {
         "id": 6,
         "title": "Anim Reflect Plugin",
@@ -128,6 +143,34 @@
         ],
         "links": [
             { "name": "Website", "url": "https://dokm.com/" }
+        ]
+    },
+        {
+        "id": 9,
+        "title": "Atacama",
+        "subtitle": "Game Multiplayer",
+        "image": "Portfolio/Atacama/atacama.png",
+        "tags": ["Unreal Engine", "C++"],
+        "description": "The official website for the DOKM project, showcasing the characters and their adventures. This website serves as a hub for fans to explore content related to the project, including animations, games, and educational resources.",
+        "images": [
+            "Portfolio/Atacama/atacama.png"
+        ],
+        "links": [
+            { "name": "Website", "url": "https://atacama.com/" }
+        ]
+    },
+        {
+        "id": 10,
+        "title": "BiciCole",
+        "subtitle": "Game Multiplayer",
+        "image": "Portfolio/BiciCole/bicicole.png",
+        "tags": ["Unreal Engine", "C++"],
+        "description": "The official website for the DOKM project, showcasing the characters and their adventures. This website serves as a hub for fans to explore content related to the project, including animations, games, and educational resources.",
+        "images": [
+            "Portfolio/BiciCole/bicicole.png"
+        ],
+        "links": [
+            { "name": "Website", "url": "https://bicicole.com/" }
         ]
     }
 ]
