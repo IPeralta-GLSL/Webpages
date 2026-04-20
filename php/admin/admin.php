@@ -644,7 +644,7 @@ function onDragLeave() {
 function onDrop(e) {
     e.preventDefault();
     this.classList.remove('drag-over');
-    if (this === dragSrc) return;
+    if (!dragSrc || this === dragSrc) return;
     const fromIndex = parseInt(dragSrc.dataset.index);
     const toIndex = parseInt(this.dataset.index);
     const moved = projects.splice(fromIndex, 1)[0];
