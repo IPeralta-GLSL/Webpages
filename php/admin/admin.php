@@ -230,6 +230,40 @@ if (empty($_SESSION['admin'])) {
 
         .add-item-btn:hover { color: #a78bfa; border-color: #7c3aed; background: rgba(124,58,237,0.06); }
 
+        .upload-zone {
+            border: 2px dashed rgba(255,255,255,0.12);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #6b7280;
+            font-size: 0.82rem;
+            position: relative;
+        }
+
+        .upload-zone:hover, .upload-zone.dragover {
+            border-color: #7c3aed;
+            background: rgba(124,58,237,0.06);
+            color: #a78bfa;
+        }
+
+        .upload-zone input[type="file"] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+
+        .upload-progress {
+            margin-top: 0.5rem;
+            font-size: 0.78rem;
+            color: #a78bfa;
+            min-height: 1.2em;
+        }
+
         .link-pair { display: grid; grid-template-columns: 1fr 1fr auto; gap: 0.4rem; align-items: center; }
         .link-pair input { min-width: 0; }
 
@@ -388,7 +422,12 @@ function buildForm(p, index) {
             </div>
             <div class="form-group full">
                 <label>Main Image Path</label>
-                <input type="text" data-field="image" value="${escAttr(p.image || '')}" oninput="updateField(${index},'image',this.value)">
+                <input type="text" id="main-img-path-${index}" data-field="image" value="${escAttr(p.image || '')}" oninput="updateField(${index},'image',this.value)">
+                <div class="upload-zone" ondragover="event.preventDefault();this.classList.add('dragover')" ondragleave="this.classList.remove('dragover')" ondrop="handleDrop(event,${index},'main')">
+                    <i class="fas fa-cloud-upload-alt"></i> Drop image or click to upload (sets main image)
+                    <input type="file" accept="image/*" onchange="uploadImage(event,${index},'main')">
+                </div>
+                <div class="upload-progress" id="upload-progress-main-${index}"></div>
             </div>
             <div class="form-group full">
                 <label>Tags (comma separated)</label>
@@ -405,7 +444,14 @@ function buildForm(p, index) {
             <div class="form-group full">
                 <label>Gallery Images</label>
                 <div class="array-field" id="images-${index}">${imagesHtml}</div>
-                <button class="add-item-btn" onclick="addImage(${index})"><i class="fas fa-plus"></i> Add Image</button>
+                <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.4rem;">
+                    <button class="add-item-btn" onclick="addImage(${index})"><i class="fas fa-plus"></i> Add path manually</button>
+                </div>
+                <div class="upload-zone" style="margin-top:0.5rem" ondragover="event.preventDefault();this.classList.add('dragover')" ondragleave="this.classList.remove('dragover')" ondrop="handleDrop(event,${index},'gallery')">
+                    <i class="fas fa-images"></i> Drop images or click to upload to gallery
+                    <input type="file" accept="image/*" multiple onchange="uploadImage(event,${index},'gallery')">
+                </div>
+                <div class="upload-progress" id="upload-progress-gallery-${index}"></div>
             </div>
             <div class="form-group full">
                 <label>Links</label>
@@ -611,6 +657,53 @@ function onDragEnd() {
     document.querySelectorAll('.project-row').forEach(r => {
         r.classList.remove('dragging', 'drag-over');
     });
+}
+
+async function uploadImage(event, projIndex, target) {
+    const files = Array.from(event.target.files);
+    if (!files.length) return;
+    const projectName = projects[projIndex].title || ('project_' + (projIndex + 1));
+    const progressId = `upload-progress-${target}-${projIndex}`;
+    const progress = document.getElementById(progressId);
+    progress.textContent = `Uploading ${files.length} file(s)…`;
+
+    for (const file of files) {
+        const fd = new FormData();
+        fd.append('image', file);
+        fd.append('project_name', projectName);
+        try {
+            const res = await fetch('upload_image.php', { method: 'POST', body: fd });
+            const data = await res.json();
+            if (data.success) {
+                if (target === 'main') {
+                    updateField(projIndex, 'image', data.path);
+                    document.getElementById(`main-img-path-${projIndex}`).value = data.path;
+                } else {
+                    if (!projects[projIndex].images) projects[projIndex].images = [];
+                    const imgIndex = projects[projIndex].images.length;
+                    projects[projIndex].images.push(data.path);
+                    const container = document.getElementById(`images-${projIndex}`);
+                    container.insertAdjacentHTML('beforeend', imageItem(data.path, projIndex, imgIndex));
+                    markUnsaved();
+                }
+                progress.textContent = `Uploaded: ${data.path}`;
+            } else {
+                progress.textContent = `Error: ${data.message}`;
+            }
+        } catch (e) {
+            progress.textContent = `Upload failed: ${e.message}`;
+        }
+    }
+
+    event.target.value = '';
+    setTimeout(() => { if (progress) progress.textContent = ''; }, 4000);
+}
+
+function handleDrop(event, projIndex, target) {
+    event.preventDefault();
+    event.currentTarget.classList.remove('dragover');
+    const fakeEvent = { target: { files: event.dataTransfer.files, value: '' }, currentTarget: event.currentTarget };
+    uploadImage(fakeEvent, projIndex, target);
 }
 
 function escHtml(str) {

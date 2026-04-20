@@ -41,7 +41,8 @@ foreach ($data as $project) {
     }
 }
 
-$file = __DIR__ . '/../../projects.json';
+$repoRoot = realpath(__DIR__ . '/../../');
+$file = $repoRoot . '/projects.json';
 $result = file_put_contents($file, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
 
 if ($result === false) {
@@ -50,4 +51,32 @@ if ($result === false) {
     exit();
 }
 
-echo json_encode(['success' => true, 'message' => 'Projects saved successfully']);
+$gitOutput = [];
+$gitStatus = 0;
+
+chdir($repoRoot);
+exec('git add -A 2>&1', $gitOutput, $gitStatus);
+if ($gitStatus !== 0) {
+    echo json_encode(['success' => false, 'message' => 'git add failed: ' . implode("\n", $gitOutput)]);
+    exit();
+}
+
+exec('git diff --cached --quiet 2>&1', $diffOut, $diffStatus);
+if ($diffStatus === 0) {
+    echo json_encode(['success' => true, 'message' => 'Saved (nothing new to commit)']);
+    exit();
+}
+
+exec('git commit -m "Admin: update projects" 2>&1', $gitOutput, $gitStatus);
+if ($gitStatus !== 0) {
+    echo json_encode(['success' => false, 'message' => 'git commit failed: ' . implode("\n", $gitOutput)]);
+    exit();
+}
+
+exec('git push 2>&1', $gitOutput, $gitStatus);
+if ($gitStatus !== 0) {
+    echo json_encode(['success' => false, 'message' => 'git push failed: ' . implode("\n", $gitOutput)]);
+    exit();
+}
+
+echo json_encode(['success' => true, 'message' => 'Projects saved and pushed to repository']);
