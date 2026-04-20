@@ -108,7 +108,7 @@
         "subtitle": "Little Tool for mirrored animations in Unreal Engine",
         "image": "Portfolio/MirrorAnimationSystem_Screenshot_01-1920x1080-0e6f9269694712dae2a103f971a862b0.avif",
         "tags": ["c++", "Unreal Engine"],
-        "description": "AnimReflect (formerly known as MirrorAnimationSystem) is a plugin for Unreal Engine that allows for dynamic animation reversal. This plugin is based on the original MirrorAnimationSystem project created by Rexocrates. AnimReflect incorporates functionalities that enable mirroring animations with their root motion at runtime, both within the editor and during gameplay.",
+        "description": "AnimReflect is a plugin for Unreal Engine that allows for dynamic animation reversal. This plugin is based on the original MirrorAnimationSystem project created by Rexocrates. AnimReflect incorporates functionalities that enable mirroring animations with their root motion at runtime, both within the editor and during gameplay.",
         "images": [
             "Portfolio/MirrorAnimationSystem_Screenshot_01-1920x1080-0e6f9269694712dae2a103f971a862b0.avif"
         ],
@@ -136,7 +136,7 @@
         "subtitle": "Game Multiplayer",
         "image": "Portfolio/DOKM/Copilot_20250818_231203.png",
         "tags": ["Unreal Engine", "C++"],
-        "description": "The official website for the DOKM project, showcasing the characters and their adventures. This website serves as a hub for fans to explore content related to the project, including animations, games, and educational resources.",
+        "description": "A multiplayer game developed using Unreal Engine, featuring dynamic gameplay and interactive environments. Players can engage in various challenges and missions, enhancing their strategic and teamwork skills.",
         "images": [
             "Portfolio/DOKM/Copilot_20250818_231203.png",
             "Portfolio/DOKM/DOKM.jpg"
@@ -151,7 +151,7 @@
         "subtitle": "Game Multiplayer",
         "image": "Portfolio/Atacama/atacama.png",
         "tags": ["Unreal Engine", "C++"],
-        "description": "The official website for the DOKM project, showcasing the characters and their adventures. This website serves as a hub for fans to explore content related to the project, including animations, games, and educational resources.",
+        "description": "A Short Film made with Unreal Engine 5",
         "images": [
             "Portfolio/Atacama/atacama.png"
         ],
@@ -165,7 +165,7 @@
         "subtitle": "Game Multiplayer",
         "image": "Portfolio/Bicicole/bicicole.png",
         "tags": ["Unreal Engine", "C++"],
-        "description": "The official website for the DOKM project, showcasing the characters and their adventures. This website serves as a hub for fans to explore content related to the project, including animations, games, and educational resources.",
+        "description": "A game for children that teaches them about the importance of bicycles and sustainable transportation for the Ministry of Educational Development and Vocational Training of the Regional Government of Andalusia. The game features fun and educational gameplay mechanics that encourage players to explore the benefits of biking and how it can positively impact the environment.",
         "images": [
             "Portfolio/Bicicole/bicicole.png"
         ],
