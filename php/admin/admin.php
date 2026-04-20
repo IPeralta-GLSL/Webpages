@@ -55,8 +55,8 @@ if (empty($_SESSION['admin'])) {
             text-decoration: none;
         }
 
-        .btn-primary { background: #7c3aed; color: #fff; }
-        .btn-primary:hover { background: #6d28d9; }
+        .btn-primary { background: #16a34a; color: #fff; }
+        .btn-primary:hover { background: #15803d; }
         .btn-success { background: #059669; color: #fff; }
         .btn-success:hover { background: #047857; }
         .btn-danger { background: #dc2626; color: #fff; }
@@ -361,7 +361,7 @@ function buildRow(p, index) {
     row.dataset.index = index;
     row.draggable = true;
 
-    const thumb = p.image ? `<img class="project-thumb" src="${escHtml(p.image)}" alt="">` : `<div class="project-thumb"></div>`;
+    const thumb = p.image ? `<img class="project-thumb" src="../../${escHtml(p.image)}" alt="">` : `<div class="project-thumb"></div>`;
 
     row.innerHTML = `
         <div class="project-header">
@@ -496,7 +496,7 @@ function updateField(index, field, value) {
         if (row) {
             if (field === 'title') row.querySelector('.project-meta h3').textContent = value || 'Untitled';
             if (field === 'subtitle') row.querySelector('.project-meta p').textContent = value;
-            if (field === 'image') row.querySelector('.project-thumb').src = value;
+            if (field === 'image') row.querySelector('.project-thumb').src = '../../' + value;
         }
     }
     markUnsaved();
