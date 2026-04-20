@@ -964,7 +964,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const formData = new FormData(contactForm);
                 
                 // Send form data to PHP script
-                const response = await fetch('send_email.php', {
+                const response = await fetch('php/email/send_email.php', {
                     method: 'POST',
                     body: formData
                 });

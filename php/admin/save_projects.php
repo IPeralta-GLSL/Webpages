@@ -1,7 +1,11 @@
 <?php
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type');
+session_start();
+if (empty($_SESSION['admin'])) {
+    http_response_code(403);
+    echo json_encode(['success' => false, 'message' => 'Unauthorized']);
+    exit();
+}
+
 header('Content-Type: application/json; charset=utf-8');
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
@@ -37,7 +41,7 @@ foreach ($data as $project) {
     }
 }
 
-$file = __DIR__ . '/projects.json';
+$file = __DIR__ . '/../../projects.json';
 $result = file_put_contents($file, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
 
 if ($result === false) {
