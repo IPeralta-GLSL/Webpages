@@ -673,8 +673,9 @@ class CosmicShader {
 
     resizeCanvas() {
         const rect = this.canvas.parentElement.getBoundingClientRect();
-        this.canvas.width = rect.width;
-        this.canvas.height = rect.height;
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        this.canvas.width = Math.max(1, Math.floor(rect.width * dpr));
+        this.canvas.height = Math.max(1, Math.floor(rect.height * dpr));
         if (this.gl) {
             this.gl.viewport(0, 0, this.canvas.width, this.canvas.height);
         }
@@ -914,9 +915,6 @@ function displayShaderCode(code) {
     lines.forEach((line, index) => {
         const codeLine = document.createElement('div');
         codeLine.className = 'code-line';
-        if (line.startsWith('    ') || line.startsWith('\t')) {
-            codeLine.classList.add('indent');
-        }
         
         // Add line number
         const lineNumber = document.createElement('span');
@@ -950,16 +948,16 @@ function highlightGLSL(line) {
     // Only highlight if not inside a comment
     if (!highlighted.includes('code-comment')) {
         // Keywords
-        highlighted = highlighted.replace(/\b(precision|uniform|attribute|varying|float|vec2|vec3|vec4|int|bool|void|return|if|else|for|while|mediump|highp|lowp|in|out)\b/g, '<span class="code-keyword">$1</span>');
+        highlighted = highlighted.replace(/\b(precision|uniform|attribute|varying|float|vec2|vec3|vec4|int|bool|void|return|if|else|for|while|mediump|highp|lowp|mat2|in|out)\b/g, '<span class="code-keyword">$1</span>');
         
         // Functions (words followed by parentheses)
-        highlighted = highlighted.replace(/\b(fract|sin|cos|dot|mix|smoothstep|distance|pow|floor|main|noise|smoothNoise|fractalNoise|cosmicBackground|texture2D|texture)(?=\s*\()/g, '<span class="code-function">$1</span>');
+        highlighted = highlighted.replace(/\b(hash21|noise|fbm|starField|main|fract|floor|dot|length|mix|smoothstep|pow|sin|cos|exp|normalize|abs|clamp|texture2D|texture)(?=\s*\()/g, '<span class="code-function">$1</span>');
         
         // Numbers
         highlighted = highlighted.replace(/\b\d+\.?\d*\b/g, '<span class="code-constant">$&</span>');
         
         // Variables
-        highlighted = highlighted.replace(/\b(time|resolution|uv|color|nebula1|nebula2|nebula3|flow1|flow2|glow|dist|vignette|value|amplitude|position|gl_Position|gl_FragColor)\b/g, '<span class="code-variable">$1</span>');
+        highlighted = highlighted.replace(/\b(time|resolution|uv|drift|warp|nebulaA|nebulaB|nebulaBlue|nebulaWarm|band|dust|starUv|color|vignette|twinkle|twinkleSpeed|tint|amplitude|value|dist|size|star|scale|density|offset|grid|cell|rnd|angle|rot|gl_Position|gl_FragColor)\b/g, '<span class="code-variable">$1</span>');
     }
 
     return highlighted;
