@@ -1990,15 +1990,18 @@ section[id] {
     }
 
     .hero {
-        padding: 5.5rem 0 3.5rem;
+        padding: 4.25rem 0 1.75rem;
         min-height: 100vh;
         min-height: 100svh;
+        align-items: stretch;
     }
 
     .hero-content {
         grid-template-columns: 1fr;
-        gap: 2.5rem;
+        gap: 1.5rem;
         padding: 0 1.25rem;
+        width: 100%;
+        align-content: space-between;
     }
 
     .hero-text {
@@ -2008,34 +2011,54 @@ section[id] {
     }
 
     .hero-title {
-        font-size: 2.35rem;
+        font-size: clamp(1.75rem, 6.5vw, 2.35rem);
+        margin-bottom: 0.5rem;
     }
 
     .hero-subtitle {
-        font-size: 1.05rem;
+        font-size: 1rem;
+        margin-bottom: 1.25rem;
     }
 
     .hero-buttons {
         justify-content: center;
         flex-wrap: wrap;
+        gap: 0.65rem;
         width: 100%;
     }
 
+    .hero-buttons .btn {
+        flex: 1 1 40%;
+        text-align: center;
+        padding: 10px 12px;
+        font-size: 0.92rem;
+        white-space: nowrap;
+    }
+
+    .code-title {
+        margin-bottom: 0.85rem;
+    }
+
     .code-title h3 {
-        font-size: 1.25rem;
+        font-size: 1.15rem;
+        margin-bottom: 0.25rem;
     }
 
     .code-title p {
-        font-size: 0.9rem;
+        display: none;
     }
 
     .code-window {
-        height: 320px;
+        height: clamp(150px, 25svh, 260px);
     }
 
     .code-animation {
         padding: 12px;
         font-size: 0.85rem;
+    }
+
+    .hero-scroll {
+        display: none;
     }
 
     .line-number {
@@ -2200,37 +2223,30 @@ section[id] {
     }
 
     .hero {
-        padding: 5rem 0 3rem;
+        padding: 4.25rem 0 1.5rem;
     }
 
     .hero-content {
-        gap: 2rem;
+        gap: 1.35rem;
         padding: 0 1rem;
     }
 
-    .hero-title {
-        font-size: 1.95rem;
-    }
-
     .hero-subtitle {
-        font-size: 0.98rem;
-    }
-
-    .hero-buttons {
-        flex-direction: column;
+        font-size: 0.95rem;
+        margin-bottom: 1.1rem;
     }
 
     .hero-buttons .btn {
-        width: 100%;
-        text-align: center;
+        padding: 10px 8px;
+        font-size: 0.88rem;
     }
 
     .code-title h3 {
-        font-size: 1.15rem;
+        font-size: 1.05rem;
     }
 
     .code-window {
-        height: 280px;
+        height: clamp(150px, 25svh, 240px);
     }
 
     .section-title {
@@ -2301,8 +2317,21 @@ section[id] {
         display: none;
     }
 
-    .hero-title {
-        font-size: 1.75rem;
+    .hero {
+        padding: 4rem 0 1.75rem;
+    }
+
+    .hero-content {
+        gap: 1.15rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .hero-buttons .btn {
+        padding: 9px 6px;
+        font-size: 0.82rem;
     }
 
     .nav-logo .logo-text {
