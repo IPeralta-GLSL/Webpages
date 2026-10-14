@@ -73,7 +73,7 @@ void main() {
     mat2 rot = mat2(cos(spin), -sin(spin), sin(spin), cos(spin));
 
     vec2 drift = vec2(time * 0.03, time * 0.01);
-    vec2 p = rot * (uv + drift);
+    vec2 p = rot * uv + drift;
 
     vec2 warp = vec2(fbm(p * 1.5 + time * 0.035), fbm(p * 1.5 + 4.7));
     float nebulaA = fbm(p * 1.8 + warp * 1.2 + vec2(time * 0.025, 0.0));
