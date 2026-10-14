@@ -396,6 +396,40 @@ body {
     text-align: center;
 }
 
+.code-tabs {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.code-tab {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.65);
+    font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+}
+
+.code-tab:hover {
+    color: #64ffda;
+    border-color: rgba(100, 255, 218, 0.4);
+}
+
+.code-tab.active {
+    background: rgba(100, 255, 218, 0.12);
+    border-color: #64ffda;
+    color: #64ffda;
+    box-shadow: 0 0 12px rgba(100, 255, 218, 0.25);
+}
+
 .code-animation {
     padding: 16px;
     overflow-y: auto;
@@ -2247,6 +2281,15 @@ section[id] {
 
     .code-window {
         height: clamp(150px, 25svh, 240px);
+    }
+
+    .code-tab {
+        font-size: 11px;
+        padding: 5px 10px;
+    }
+
+    .code-header {
+        padding: 8px 10px;
     }
 
     .section-title {

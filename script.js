@@ -775,7 +775,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadProjects(); // Load projects dynamically
     loadExperience(); // Load experience dynamically
     new CosmicShader();
-    loadFragmentShaderCode();
+    loadShaderCode();
     initAudioControl();
 });
 
@@ -865,15 +865,40 @@ function initAudioControl() {
     updateVolumeIcon(bgMusic.volume);
 }
 
-// Load and display fragment shader code
-async function loadFragmentShaderCode() {
-    try {
-        const response = await fetch('shaders/fragment.glsl');
-        const shaderCode = await response.text();
-        displayShaderCode(shaderCode);
-    } catch (error) {
-        console.warn('Could not load fragment shader file:', error);
-    }
+const shaderSources = {};
+
+async function loadShaderCode() {
+    const files = {
+        fragment: 'shaders/fragment.glsl',
+        vertex: 'shaders/vertex.glsl'
+    };
+
+    await Promise.all(Object.entries(files).map(async ([key, url]) => {
+        try {
+            const response = await fetch(url);
+            shaderSources[key] = await response.text();
+        } catch (error) {
+            console.warn('Could not load shader file:', url, error);
+            shaderSources[key] = '';
+        }
+    }));
+
+    initShaderTabs();
+}
+
+function initShaderTabs() {
+    const tabs = document.querySelectorAll('.code-tab');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            if (tab.classList.contains('active')) return;
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            displayShaderCode(shaderSources[tab.dataset.shader] || '');
+        });
+    });
+
+    displayShaderCode(shaderSources.fragment || '');
 }
 
 function displayShaderCode(code) {
@@ -925,16 +950,16 @@ function highlightGLSL(line) {
     // Only highlight if not inside a comment
     if (!highlighted.includes('code-comment')) {
         // Keywords
-        highlighted = highlighted.replace(/\b(precision|uniform|float|vec2|vec3|vec4|int|bool|void|return|if|else|for|while|mediump)\b/g, '<span class="code-keyword">$1</span>');
+        highlighted = highlighted.replace(/\b(precision|uniform|attribute|varying|float|vec2|vec3|vec4|int|bool|void|return|if|else|for|while|mediump|highp|lowp|in|out)\b/g, '<span class="code-keyword">$1</span>');
         
         // Functions (words followed by parentheses)
-        highlighted = highlighted.replace(/\b(fract|sin|cos|dot|mix|smoothstep|distance|pow|floor|main|noise|smoothNoise|fractalNoise|cosmicBackground)(?=\s*\()/g, '<span class="code-function">$1</span>');
+        highlighted = highlighted.replace(/\b(fract|sin|cos|dot|mix|smoothstep|distance|pow|floor|main|noise|smoothNoise|fractalNoise|cosmicBackground|texture2D|texture)(?=\s*\()/g, '<span class="code-function">$1</span>');
         
         // Numbers
         highlighted = highlighted.replace(/\b\d+\.?\d*\b/g, '<span class="code-constant">$&</span>');
         
         // Variables
-        highlighted = highlighted.replace(/\b(time|resolution|uv|color|nebula1|nebula2|nebula3|flow1|flow2|glow|dist|vignette|value|amplitude)\b/g, '<span class="code-variable">$1</span>');
+        highlighted = highlighted.replace(/\b(time|resolution|uv|color|nebula1|nebula2|nebula3|flow1|flow2|glow|dist|vignette|value|amplitude|position|gl_Position|gl_FragColor)\b/g, '<span class="code-variable">$1</span>');
     }
 
     return highlighted;
