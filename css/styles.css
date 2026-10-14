@@ -1867,3 +1867,449 @@ body {
     font-size: 1rem;
     max-width: 400px;
 }
+
+body {
+    overflow-x: hidden;
+}
+
+section[id] {
+    scroll-margin-top: 90px;
+}
+
+.modal-gallery,
+.modal-info {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.thumbnail-gallery,
+.thumbnails {
+    width: 100%;
+    max-width: 100%;
+}
+
+.main-image img {
+    max-width: 100%;
+}
+
+@media (max-width: 1024px) {
+    .hero-content {
+        gap: 2.5rem;
+        padding: 0 1.5rem;
+        width: 100%;
+    }
+
+    .hero-title {
+        font-size: 2.8rem;
+    }
+
+    .about-main {
+        grid-template-columns: 250px 1fr;
+        gap: 2rem;
+    }
+
+    .profile-image {
+        width: 220px;
+        height: 220px;
+    }
+
+    .modal-body {
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 900px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-container {
+        gap: 0.75rem;
+    }
+
+    .nav-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        transform: none;
+        flex-direction: column;
+        gap: 0;
+        background: rgba(10, 10, 10, 0.98);
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 0.5rem 20px 1rem;
+        display: none;
+        z-index: 1000;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .nav-link {
+        display: block;
+        padding: 0.9rem 0.25rem;
+        font-size: 1.05rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .nav-link::after {
+        display: none;
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(6px) rotate(45deg);
+    }
+
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .volume-slider-container {
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+    }
+
+    .volume-slider {
+        width: 56px;
+    }
+
+    .nav-logo .logo-text {
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 16px;
+    }
+
+    .hero {
+        padding: 5.5rem 0 3.5rem;
+        min-height: 100vh;
+        min-height: 100svh;
+    }
+
+    .hero-content {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        padding: 0 1.25rem;
+    }
+
+    .hero-text {
+        align-items: center;
+        text-align: center;
+        width: 100%;
+    }
+
+    .hero-title {
+        font-size: 2.35rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.05rem;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .code-title h3 {
+        font-size: 1.25rem;
+    }
+
+    .code-title p {
+        font-size: 0.9rem;
+    }
+
+    .code-window {
+        height: 320px;
+    }
+
+    .code-animation {
+        padding: 12px;
+        font-size: 0.85rem;
+    }
+
+    .line-number {
+        width: 28px;
+        margin-right: 0.6rem;
+        font-size: 0.75rem;
+    }
+
+    .indent {
+        margin-left: 1.25rem;
+    }
+
+    .about,
+    .experience,
+    .projects,
+    .contact {
+        padding: 70px 0;
+    }
+
+    .about-main {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .profile-section {
+        position: static;
+    }
+
+    .profile-image {
+        width: 200px;
+        height: 200px;
+    }
+
+    .about-text p {
+        font-size: 1rem;
+    }
+
+    .skills-section {
+        padding: 1.5rem 1.25rem;
+    }
+
+    .skill-icons {
+        grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+        gap: 0.75rem;
+    }
+
+    .skill-icon {
+        padding: 0.85rem 0.35rem;
+    }
+
+    .skill-icon i,
+    .skill-icon svg,
+    .skill-icon img {
+        width: 34px;
+        height: 34px;
+        font-size: 1.6rem;
+    }
+
+    .skill-icon span {
+        font-size: 0.72rem;
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
+        gap: 1.5rem;
+    }
+
+    .project-info {
+        padding: 1.25rem;
+    }
+
+    .contact-content p {
+        font-size: 1.05rem;
+    }
+
+    .contact-form {
+        padding: 1.5rem 1.25rem;
+    }
+
+    .contact-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .contact-link {
+        width: 100%;
+        max-width: 320px;
+        justify-content: center;
+    }
+
+    .modal-content {
+        width: 96%;
+        margin: 2% auto;
+        max-height: 96vh;
+    }
+
+    .modal-header {
+        padding: 1.25rem;
+    }
+
+    .modal-header h2 {
+        font-size: 1.35rem;
+    }
+
+    .close {
+        font-size: 1.85rem;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .modal-body {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1.25rem;
+        min-height: 0;
+    }
+
+    .modal-gallery {
+        height: auto;
+    }
+
+    .main-image {
+        flex: none;
+        min-height: 220px;
+        max-height: 50vh;
+        height: 50vh;
+    }
+
+    .main-image iframe {
+        height: 100%;
+    }
+
+    .modal-description {
+        max-height: none;
+        padding-right: 0;
+        font-size: 0.95rem;
+    }
+
+    .section-title {
+        font-size: 1.75rem !important;
+        margin-bottom: 2rem !important;
+    }
+}
+
+@media (max-width: 560px) {
+    .nav-container {
+        padding: 0.85rem 14px;
+    }
+
+    .nav-logo .logo-text {
+        font-size: 1.1rem;
+    }
+
+    .audio-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 15px;
+    }
+
+    .hero {
+        padding: 5rem 0 3rem;
+    }
+
+    .hero-content {
+        gap: 2rem;
+        padding: 0 1rem;
+    }
+
+    .hero-title {
+        font-size: 1.95rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.98rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .code-title h3 {
+        font-size: 1.15rem;
+    }
+
+    .code-window {
+        height: 280px;
+    }
+
+    .section-title {
+        font-size: 1.55rem !important;
+    }
+
+    .profile-image {
+        width: 170px;
+        height: 170px;
+    }
+
+    .skills-section {
+        padding: 1.25rem 1rem;
+    }
+
+    .skill-icons {
+        grid-template-columns: repeat(auto-fit, minmax(68px, 1fr));
+        gap: 0.6rem;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .project-info h3 {
+        font-size: 1.15rem;
+    }
+
+    .contact-form {
+        padding: 1.25rem 1rem;
+    }
+
+    .contact-link {
+        padding: 0.9rem 1.5rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        padding: 0.7rem;
+    }
+
+    .modal-header {
+        padding: 1rem;
+    }
+
+    .modal-body {
+        padding: 1rem;
+    }
+
+    .main-image {
+        flex: none;
+        min-height: 180px;
+        height: 38vh;
+        max-height: 38vh;
+    }
+
+    .thumbnail-gallery {
+        height: 85px;
+    }
+
+    .thumbnails {
+        height: 85px;
+    }
+}
+
+@media (max-width: 400px) {
+    .volume-slider-container {
+        display: none;
+    }
+
+    .hero-title {
+        font-size: 1.75rem;
+    }
+
+    .nav-logo .logo-text {
+        font-size: 1rem;
+    }
+
+    .btn {
+        padding: 11px 18px;
+    }
+}
