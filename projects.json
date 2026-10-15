@@ -1,5 +1,25 @@
 [
     {
+        "id": 12,
+        "title": "Mafalda Inmersiva VR",
+        "subtitle": "Immersive VR experience for the Mafalda Inmersiva exhibition at Centro Cultural Recoleta",
+        "image": "Portfolio/MafaldaInmersiva/mafalda_01.jpg",
+        "tags": ["VR", "3D", "Interactive"],
+        "description": "An immersive virtual reality experience created for the Mafalda Inmersiva exhibition at Centro Cultural Recoleta (Buenos Aires), bringing Quino's beloved universe into three dimensions.\n\n• “Soñando con Mafalda”: the VR experience of the exhibition, where groups of six visitors explore and share a fantasy world together with VR headsets\n• A multisensory journey through Mafalda's room, Manolo's store and her neighborhood, surrounded by smells, textures and sounds\n• Sessions of approximately one hour, for all ages\n• Part of Mafalda Inmersiva at Centro Cultural Recoleta, Junín 1930, Buenos Aires\n• Designed to connect Mafalda with new generations",
+        "images": [
+            "Portfolio/MafaldaInmersiva/mafalda_01.jpg",
+            "Portfolio/MafaldaInmersiva/mafalda_02.jpg",
+            "Portfolio/MafaldaInmersiva/mafalda_03.jpg",
+            "Portfolio/MafaldaInmersiva/mafalda_04.jpg",
+            "Portfolio/MafaldaInmersiva/mafalda_05.jpg",
+            "Portfolio/MafaldaInmersiva/mafalda_06.jpg",
+            "Portfolio/MafaldaInmersiva/mafalda_07.jpg"
+        ],
+        "links": [
+            { "name": "Website", "url": "https://www.mafaldainmersiva.com/" }
+        ]
+    },
+    {
         "id": 1,
         "title": "Darkmoon Engine",
         "subtitle": "Game engine based real time rasterization and ray tracing with RT core hardware acceleration",
