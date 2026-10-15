@@ -264,8 +264,8 @@ function initializeProjectCards() {
     // Re-observe elements for scroll animations
     projectCards.forEach(card => {
         card.style.opacity = '0';
-        card.style.transform = 'translateY(30px)';
-        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.85s ease-out, transform 0.85s ease-out';
         observer.observe(card);
     });
 }
@@ -487,8 +487,8 @@ const observer = new IntersectionObserver((entries) => {
 // Observe elements for scroll animations
 document.querySelectorAll('.project-card, .about-text, .skills-section, .profile-image, .skill-icon').forEach(el => {
     el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.85s ease-out, transform 0.85s ease-out';
     observer.observe(el);
 });
 
@@ -714,6 +714,7 @@ class CosmicShader {
             this.resolutionUniform = this.gl.getUniformLocation(this.program, 'resolution');
             this.panUniform = this.gl.getUniformLocation(this.program, 'pan');
             this.zoomUniform = this.gl.getUniformLocation(this.program, 'zoom');
+            this.scrollUniform = this.gl.getUniformLocation(this.program, 'scroll');
         } catch (error) {
             console.error('Error loading shaders:', error);
         }
@@ -763,8 +764,10 @@ class CosmicShader {
 
         this.gl.uniform1f(this.timeUniform, currentTime);
         this.gl.uniform2f(this.resolutionUniform, this.canvas.width, this.canvas.height);
-        this.gl.uniform2f(this.panUniform, Math.sin(currentTime * 0.009) * 0.03, Math.cos(currentTime * 0.007) * 0.02);
-        this.gl.uniform1f(this.zoomUniform, 1.0 + Math.sin(currentTime * 0.013) * 0.04);
+        const scroll = Math.min((window.scrollY || 0) / window.innerHeight, 2.5);
+        this.gl.uniform2f(this.panUniform, Math.sin(currentTime * 0.009) * 0.03, Math.cos(currentTime * 0.007) * 0.02 + scroll * 0.15);
+        this.gl.uniform1f(this.zoomUniform, 1.0 + Math.sin(currentTime * 0.013) * 0.04 + scroll * 0.22);
+        this.gl.uniform1f(this.scrollUniform, scroll);
 
         this.gl.clearColor(0.02, 0.02, 0.08, 1.0);
         this.gl.clear(this.gl.COLOR_BUFFER_BIT);
@@ -961,7 +964,7 @@ function highlightGLSL(line) {
         highlighted = highlighted.replace(/\b\d+\.?\d*\b/g, '<span class="code-constant">$&</span>');
         
         // Variables
-        highlighted = highlighted.replace(/\b(time|resolution|pan|zoom|sway|vUv|uv|p|spin|rot|drift|band|warp|cloudA|cloudB|violet|blue|magenta|dust|starUv|stars|color|twinkle|twinkleSpeed|tint|amplitude|value|dist|size|core|halo|spike|fade|star|scale|density|offset|grid|cell|pos|sid|rnd|gl_Position|gl_FragColor)\b/g, '<span class="code-variable">$1</span>');
+        highlighted = highlighted.replace(/\b(time|scroll|resolution|pan|zoom|sway|vUv|uv|p|spin|rot|drift|band|warp|cloudA|cloudB|violet|blue|magenta|dust|starUv|stars|color|twinkle|twinkleSpeed|tint|amplitude|value|dist|size|core|halo|spike|fade|star|scale|density|offset|grid|cell|pos|sid|rnd|gl_Position|gl_FragColor)\b/g, '<span class="code-variable">$1</span>');
     }
 
     return highlighted;

@@ -5,6 +5,7 @@ precision mediump float;
 #endif
 
 uniform float time;
+uniform float scroll;
 
 varying vec2 vUv;
 
@@ -114,7 +115,7 @@ void main() {
 
     float spin = time * 0.015;
     mat2 rot = mat2(cos(spin), -sin(spin), sin(spin), cos(spin));
-    vec2 drift = vec2(time * 0.03, time * 0.01);
+    vec2 drift = vec2(time * 0.03, time * 0.01 + scroll * 0.12);
     vec2 p = rot * uv + drift;
 
     float band = galaxyBand(p);
@@ -122,6 +123,7 @@ void main() {
     vec3 color = nebulaLayer(p, band);
     color += starLayers(p);
 
+    color *= 1.0 - 0.28 * clamp(scroll, 0.0, 1.0);
     color *= 1.0 - 0.4 * dot(uv, uv);
     color = pow(color, vec3(1.08));
 

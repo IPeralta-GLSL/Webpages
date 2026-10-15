@@ -1907,6 +1907,35 @@ body {
     overflow-x: hidden;
 }
 
+.hero::after {
+    display: block;
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 220px;
+    background: linear-gradient(180deg, rgba(17, 17, 17, 0) 0%, #111111 100%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.hero-scroll {
+    z-index: 3;
+}
+
+.about {
+    background: linear-gradient(180deg, #111111 0%, #111111 calc(100% - 160px), #0a0a0a 100%);
+}
+
+.projects {
+    background: linear-gradient(180deg, #0a0a0a 0%, #0a0a0a calc(100% - 160px), #111111 100%);
+}
+
+.contact {
+    background: linear-gradient(180deg, #111111 0%, #111111 calc(100% - 160px), #0a0a0a 100%);
+}
+
 section[id] {
     scroll-margin-top: 90px;
 }
