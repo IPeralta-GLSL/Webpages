@@ -261,13 +261,7 @@ function initializeProjectCards() {
         });
     });
     
-    // Re-observe elements for scroll animations
-    projectCards.forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        card.style.transition = 'opacity 0.85s ease-out, transform 0.85s ease-out';
-        observer.observe(card);
-    });
+    refreshScrollReveal();
 }
 
 // Show error message if projects fail to load
@@ -469,28 +463,69 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Intersection Observer for animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
+const scrollRevealItems = [];
+const scrollRevealSeen = new Set();
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
+function registerScrollReveal(el, offset) {
+    if (!el || scrollRevealSeen.has(el)) return;
+    scrollRevealSeen.add(el);
+    scrollRevealItems.push({ el: el, offset: offset || 0 });
+}
+
+function refreshScrollReveal() {
+    const base = '.section-title, .about-text, .profile-image, .skill-category h3, .project-card, .contact-content > p, .contact-form-container, .contact-divider, .contact-links';
+    document.querySelectorAll(base).forEach(el => registerScrollReveal(el, 0));
+    document.querySelectorAll('.skill-icon').forEach((el, i) => registerScrollReveal(el, (i % 8) * 36));
+    updateScrollReveal();
+}
+
+function updateScrollReveal() {
+    const vh = window.innerHeight;
+    const start = vh * 0.92;
+    const end = vh * 0.38;
+    const scrollY = window.scrollY || 0;
+    const maxScroll = Math.max(0, (document.documentElement.scrollHeight || 0) - vh);
+    for (let i = 0; i < scrollRevealItems.length; i++) {
+        const item = scrollRevealItems[i];
+        const rect = item.el.getBoundingClientRect();
+        let endY = end;
+        const reachable = rect.top + scrollY - maxScroll - item.offset;
+        if (reachable > endY) endY = reachable;
+        let startY = start;
+        if (startY <= endY) startY = endY + 24;
+        let t = (startY - (rect.top - item.offset)) / (startY - endY);
+        t = t < 0 ? 0 : (t > 1 ? 1 : t);
+        const e = t * t * (3.0 - 2.0 * t);
+        item.el.style.opacity = e;
+        item.el.style.transform = 'translateY(' + ((1 - e) * 26).toFixed(1) + 'px)';
+    }
+}
+
+function updateHeroFade() {
+    const heroText = document.querySelector('.hero-text');
+    if (!heroText) return;
+    let t = window.scrollY / (window.innerHeight * 0.55);
+    t = t < 0 ? 0 : (t > 1 ? 1 : t);
+    heroText.style.opacity = 1 - t;
+    heroText.style.transform = 'translateY(' + (t * -36).toFixed(1) + 'px)';
+}
+
+let scrollFrame = 0;
+function onScrollFrame() {
+    if (scrollFrame) return;
+    scrollFrame = requestAnimationFrame(() => {
+        scrollFrame = 0;
+        updateHeroFade();
+        updateScrollReveal();
     });
-}, observerOptions);
+}
 
-// Observe elements for scroll animations
-document.querySelectorAll('.project-card, .about-text, .skills-section, .profile-image, .skill-icon').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.85s ease-out, transform 0.85s ease-out';
-    observer.observe(el);
-});
+const observer = { observe: (el) => registerScrollReveal(el, 0) };
+
+window.addEventListener('scroll', onScrollFrame, { passive: true });
+window.addEventListener('resize', onScrollFrame);
+refreshScrollReveal();
+updateHeroFade();
 
 // Typing effect for hero subtitle
 function typeWriter(element, text, speed = 50) {
