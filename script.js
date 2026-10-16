@@ -503,11 +503,16 @@ function updateScrollReveal() {
 
 function updateHeroFade() {
     const heroText = document.querySelector('.hero-text');
-    if (!heroText) return;
+    const heroScroll = document.querySelector('.hero-scroll');
     let t = window.scrollY / (window.innerHeight * 0.55);
     t = t < 0 ? 0 : (t > 1 ? 1 : t);
-    heroText.style.opacity = 1 - t;
-    heroText.style.transform = 'translateY(' + (t * -36).toFixed(1) + 'px)';
+    if (heroText) {
+        heroText.style.opacity = 1 - t;
+        heroText.style.transform = 'translateY(' + (t * -36).toFixed(1) + 'px)';
+    }
+    if (heroScroll) {
+        heroScroll.style.opacity = 1 - t;
+    }
 }
 
 let scrollFrame = 0;
@@ -553,9 +558,13 @@ window.addEventListener('load', () => {
 // Parallax effect for hero section
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
-    const hero = document.querySelector('.hero');
-    if (hero) {
-        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+    const heroContent = document.querySelector('.hero-content');
+    const shaderCanvas = document.querySelector('.shader-background');
+    if (heroContent) {
+        heroContent.style.transform = `translateY(${scrolled * -0.25}px)`;
+    }
+    if (shaderCanvas) {
+        shaderCanvas.style.transform = `translateY(${scrolled * 0.12}px)`;
     }
 });
 
