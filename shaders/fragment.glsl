@@ -4,6 +4,12 @@ precision highp float;
 precision mediump float;
 #endif
 
+#ifdef QUALITY_LOW
+#define OCTAVES 3
+#else
+#define OCTAVES 5
+#endif
+
 uniform float time;
 uniform float scroll;
 uniform vec2 mouse;
@@ -32,7 +38,7 @@ float fbm(vec2 p) {
     float value = 0.0;
     float amplitude = 0.5;
     mat2 rot = mat2(0.8, 0.6, -0.6, 0.8);
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < OCTAVES; i++) {
         value += amplitude * noise(p);
         p = rot * p * 2.03;
         amplitude *= 0.5;
@@ -90,8 +96,11 @@ vec3 starField(vec2 uv, float scale, float density, float twinkleSpeed) {
             float fade = 1.0 - smoothstep(0.03, 0.045, dist);
             float core = (1.0 - smoothstep(size * 0.3, size, dist)) * fade;
             float halo = exp(-dist / max(size * 1.1, 0.003)) * size * 7.0 * fade;
-            float spike = (exp(-abs(pos.x) * 20.0) * exp(-abs(pos.y) * 2.5) +
-                           exp(-abs(pos.y) * 20.0) * exp(-abs(pos.x) * 2.5)) * step(0.82, hash21(sid + 17.0)) * 0.12;
+            float spike = 0.0;
+#ifndef QUALITY_LOW
+            spike = (exp(-abs(pos.x) * 20.0) * exp(-abs(pos.y) * 2.5) +
+                     exp(-abs(pos.y) * 20.0) * exp(-abs(pos.x) * 2.5)) * step(0.82, hash21(sid + 17.0)) * 0.12;
+#endif
 
             float twinkle = 0.75 + 0.25 * sin(time * twinkleSpeed + rnd * 40.0);
             vec3 tint = mix(vec3(0.62, 0.76, 1.0), vec3(1.0, 0.84, 0.62), hash21(sid + 9.0));
@@ -105,8 +114,10 @@ vec3 starLayers(vec2 p) {
     vec2 starUv = p + vec2(time * 0.003, 0.0);
     vec3 stars = vec3(0.0);
     stars += starField(starUv, 28.0, 0.10, 2.2) * 0.9;
+#ifndef QUALITY_LOW
     stars += starField(starUv + vec2(time * 0.006, -time * 0.002) + 3.7, 50.0, 0.05, 1.6) * 0.55;
     stars += starField(starUv + vec2(time * 0.004, time * 0.0015) + 9.1, 60.0, 0.035, 1.1) * 0.4;
+#endif
     stars += starField(starUv - vec2(time * 0.002, 0.0), 10.0, 0.04, 0.7) * vec3(1.0, 0.95, 0.9) * 1.2;
     return stars / (1.0 + stars * 0.35);
 }

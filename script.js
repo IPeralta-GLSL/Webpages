@@ -695,6 +695,9 @@ class CosmicShader {
         this.program = null;
         this.startTime = Date.now();
         this.mouse = { x: 0, y: 0, tx: 0, ty: 0 };
+        this.lowPower = window.innerWidth < 900 ||
+            /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+            (navigator.deviceMemory && navigator.deviceMemory <= 2);
         this.init();
     }
 
@@ -718,7 +721,8 @@ class CosmicShader {
 
     resizeCanvas() {
         const rect = this.canvas.parentElement.getBoundingClientRect();
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const maxDpr = this.lowPower ? 1.25 : 2;
+        const dpr = Math.min(window.devicePixelRatio || 1, maxDpr);
         this.canvas.width = Math.max(1, Math.floor(rect.width * dpr));
         this.canvas.height = Math.max(1, Math.floor(rect.height * dpr));
         if (this.gl) {
@@ -728,9 +732,9 @@ class CosmicShader {
 
     async setupShaders() {
         try {
-            // Load shader files
             const vertexShaderSource = await this.loadShaderFile('shaders/vertex.glsl');
-            const fragmentShaderSource = await this.loadShaderFile('shaders/fragment.glsl');
+            const qualityDefine = this.lowPower ? '#define QUALITY_LOW 1\n' : '';
+            const fragmentShaderSource = qualityDefine + await this.loadShaderFile('shaders/fragment.glsl');
 
             const vertexShader = this.createShader(this.gl.VERTEX_SHADER, vertexShaderSource);
             const fragmentShader = this.createShader(this.gl.FRAGMENT_SHADER, fragmentShaderSource);
