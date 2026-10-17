@@ -948,17 +948,29 @@ body {
 }
 
 .contact {
-    padding: 110px 0;
+    padding: 85px 0 75px;
     background: var(--paper);
     position: relative;
     overflow: hidden;
 }
 
-.contact-content p {
-    font-size: 1.05rem;
+.contact .section-title {
+    margin-bottom: 2.25rem;
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 1.75rem 3.25rem;
+    align-items: start;
+}
+
+.contact-content > p {
+    grid-column: 1 / -1;
+    font-size: 1.02rem;
     font-weight: 300;
     color: var(--ink-muted);
-    margin-bottom: 2.5rem;
+    margin-bottom: 0.25rem;
     position: relative;
     z-index: 2;
     max-width: 58ch;
@@ -972,21 +984,22 @@ body {
     border: 1px solid var(--line);
     position: relative;
     z-index: 2;
-    flex-wrap: wrap;
+    grid-column: 2;
+    grid-row: 3;
+    flex-direction: column;
 }
 
 .contact-link {
     display: flex;
     align-items: center;
     gap: 0.85rem;
-    padding: 1.35rem 2.15rem;
+    padding: 1.15rem 1.5rem;
     background: var(--paper);
     color: var(--ink);
     text-decoration: none;
     transition: all 0.3s ease;
-    flex: 1 1 200px;
     font-family: var(--mono);
-    font-size: 0.74rem;
+    font-size: 0.72rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
 }
@@ -1002,8 +1015,9 @@ body {
 }
 
 .contact-form-container {
-    max-width: 640px;
-    margin: 0 0 3.5rem 0;
+    grid-column: 1;
+    grid-row: 2 / span 2;
+    margin: 0;
     position: relative;
     z-index: 2;
 }
@@ -1011,17 +1025,25 @@ body {
 .contact-form {
     background: var(--paper-raised);
     border: 1px solid var(--line);
-    padding: 2.25rem;
+    padding: 1.65rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 1.15rem;
 }
 
 .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.05rem;
     text-align: left;
+}
+
+.form-group:nth-child(3),
+.form-group:nth-child(4) {
+    grid-column: 1 / -1;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 0.65rem;
+    margin-bottom: 0.5rem;
     color: var(--green);
     font-family: var(--mono);
     font-size: 0.68rem;
@@ -1032,7 +1054,7 @@ body {
 .form-group input,
 .form-group textarea {
     width: 100%;
-    padding: 0.85rem 1rem;
+    padding: 0.75rem 0.9rem;
     background: var(--paper-deep);
     border: 1px solid var(--line);
     border-radius: 0;
@@ -1056,15 +1078,16 @@ body {
 
 .form-group textarea {
     resize: vertical;
-    min-height: 130px;
+    min-height: 92px;
 }
 
 .submit-btn {
     width: 100%;
+    grid-column: 1 / -1;
     background: var(--green);
     color: var(--paper-deep);
     border: 1px solid var(--green);
-    padding: 1.05rem;
+    padding: 0.95rem;
     font-family: var(--mono);
     font-size: 0.76rem;
     font-weight: 700;
@@ -1119,10 +1142,12 @@ body {
 
 .contact-divider {
     position: relative;
-    margin: 2.5rem 0;
+    margin: 0.25rem 0 0;
     text-align: left;
     z-index: 2;
     border-top: 1px solid var(--line);
+    grid-column: 2;
+    grid-row: 2;
 }
 
 .contact-divider span {
@@ -1630,20 +1655,56 @@ body {
         padding: 1.35rem;
     }
 
-    .contact-form-container {
-        margin-bottom: 2.5rem;
+    .contact {
+        padding: 65px 0 55px;
+    }
+
+    .contact .section-title {
+        margin-bottom: 1.85rem;
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 1.35rem;
+    }
+
+    .contact-form-container,
+    .contact-divider,
+    .contact-links {
+        grid-column: 1;
+        grid-row: auto;
     }
 
     .contact-form {
-        padding: 1.5rem 1.25rem;
+        padding: 1.15rem 1rem;
+    }
+
+    .form-group {
+        margin-bottom: 0.9rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        padding: 0.65rem 0.85rem;
+    }
+
+    .form-group textarea {
+        min-height: 80px;
     }
 
     .contact-links {
-        flex-direction: column;
+        flex-direction: row;
     }
 
     .contact-link {
-        width: 100%;
+        width: auto;
+        flex: 1;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.45rem;
+        padding: 0.95rem 0.35rem;
+        font-size: 0.62rem;
+        text-align: center;
     }
 
     .modal-content {
@@ -1765,16 +1826,17 @@ body {
     }
 
     .contact-form {
-        padding: 1.25rem 1rem;
+        padding: 1.05rem 0.9rem;
     }
 
     .contact-link {
-        padding: 1.15rem 1.5rem;
+        padding: 0.85rem 0.25rem;
+        font-size: 0.58rem;
     }
 
     .form-group input,
     .form-group textarea {
-        padding: 0.75rem;
+        padding: 0.6rem 0.8rem;
     }
 
     .modal-header {
