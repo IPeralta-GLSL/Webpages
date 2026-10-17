@@ -6,6 +6,7 @@ precision mediump float;
 
 uniform float time;
 uniform float scroll;
+uniform vec2 mouse;
 
 varying vec2 vUv;
 
@@ -113,9 +114,9 @@ vec3 starLayers(vec2 p) {
 void main() {
     vec2 uv = vUv;
 
-    float spin = time * 0.015;
+    float spin = time * 0.015 + mouse.x * 0.035;
     mat2 rot = mat2(cos(spin), -sin(spin), sin(spin), cos(spin));
-    vec2 drift = vec2(time * 0.03, time * 0.01 + scroll * 0.12);
+    vec2 drift = vec2(time * 0.03 + mouse.x * 0.09, time * 0.01 + scroll * 0.12 - mouse.y * 0.06);
     vec2 p = rot * uv + drift;
 
     float band = galaxyBand(p);

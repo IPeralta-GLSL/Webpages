@@ -694,6 +694,7 @@ class CosmicShader {
         this.gl = null;
         this.program = null;
         this.startTime = Date.now();
+        this.mouse = { x: 0, y: 0, tx: 0, ty: 0 };
         this.init();
     }
 
@@ -706,6 +707,10 @@ class CosmicShader {
 
         this.resizeCanvas();
         window.addEventListener('resize', () => this.resizeCanvas());
+        window.addEventListener('pointermove', (e) => {
+            this.mouse.tx = (e.clientX / window.innerWidth) * 2 - 1;
+            this.mouse.ty = (e.clientY / window.innerHeight) * 2 - 1;
+        }, { passive: true });
 
         await this.setupShaders();
         this.render();
@@ -755,6 +760,7 @@ class CosmicShader {
             this.panUniform = this.gl.getUniformLocation(this.program, 'pan');
             this.zoomUniform = this.gl.getUniformLocation(this.program, 'zoom');
             this.scrollUniform = this.gl.getUniformLocation(this.program, 'scroll');
+            this.mouseUniform = this.gl.getUniformLocation(this.program, 'mouse');
         } catch (error) {
             console.error('Error loading shaders:', error);
         }
@@ -808,6 +814,9 @@ class CosmicShader {
         this.gl.uniform2f(this.panUniform, Math.sin(currentTime * 0.009) * 0.03, Math.cos(currentTime * 0.007) * 0.02 + scroll * 0.15);
         this.gl.uniform1f(this.zoomUniform, 1.0 + Math.sin(currentTime * 0.013) * 0.04 + scroll * 0.22);
         this.gl.uniform1f(this.scrollUniform, scroll);
+        this.mouse.x += (this.mouse.tx - this.mouse.x) * 0.06;
+        this.mouse.y += (this.mouse.ty - this.mouse.y) * 0.06;
+        this.gl.uniform2f(this.mouseUniform, this.mouse.x, this.mouse.y);
 
         this.gl.clearColor(0.02, 0.02, 0.08, 1.0);
         this.gl.clear(this.gl.COLOR_BUFFER_BIT);
@@ -1004,7 +1013,7 @@ function highlightGLSL(line) {
         highlighted = highlighted.replace(/\b\d+\.?\d*\b/g, '<span class="code-constant">$&</span>');
         
         // Variables
-        highlighted = highlighted.replace(/\b(time|scroll|resolution|pan|zoom|sway|vUv|uv|p|spin|rot|drift|band|warp|cloudA|cloudB|violet|blue|magenta|dust|starUv|stars|color|twinkle|twinkleSpeed|tint|amplitude|value|dist|size|core|halo|spike|fade|star|scale|density|offset|grid|cell|pos|sid|rnd|gl_Position|gl_FragColor)\b/g, '<span class="code-variable">$1</span>');
+        highlighted = highlighted.replace(/\b(time|scroll|mouse|resolution|pan|zoom|sway|vUv|uv|p|spin|rot|drift|band|warp|cloudA|cloudB|violet|blue|magenta|dust|starUv|stars|color|twinkle|twinkleSpeed|tint|amplitude|value|dist|size|core|halo|spike|fade|star|scale|density|offset|grid|cell|pos|sid|rnd|gl_Position|gl_FragColor)\b/g, '<span class="code-variable">$1</span>');
     }
 
     return highlighted;
