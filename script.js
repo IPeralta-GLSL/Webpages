@@ -559,12 +559,8 @@ window.addEventListener('load', () => {
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
     const heroContent = document.querySelector('.hero-content');
-    const shaderCanvas = document.querySelector('.shader-background');
     if (heroContent) {
         heroContent.style.transform = `translateY(${scrolled * -0.25}px)`;
-    }
-    if (shaderCanvas) {
-        shaderCanvas.style.transform = `translateY(${scrolled * 0.12}px)`;
     }
 });
 
